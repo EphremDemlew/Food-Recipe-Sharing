@@ -1049,7 +1049,7 @@ import navbar from "../components/navbar.vue";
             <div class="mt-8">
               <a
                 href="mailto: ephyaabb@example.com"
-                class="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline"
+                class="uppercase text-sm font-bold tracking-wide bg-[#002D74] text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline"
               >
                 Send Message
               </a>

@@ -62,7 +62,7 @@
             <li>
               <router-link
                 to="/home"
-                class="text-red-500 block font-bold py-2 focus:text-blue-600 pr-4 pl-3 bg-blue-50 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                class="block py-2 font-bold pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >Home</router-link
               >
             </li>

@@ -145,7 +145,7 @@
               <div class="flex flex-wrap text-center justify-between pt-4 mb-2">
                 <button
                   type="button"
-                  class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-black rounded-lg hover:bg-cyan-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-black rounded-lg hover:bg-[#002D74] hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Likes
 
