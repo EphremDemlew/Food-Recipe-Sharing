@@ -1,0 +1,10 @@
+- name: default
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url: postgres://kjupilwcakgcja:863e3679cfd369730e02494d521c05fa8729cbd2b3ba084312efb04d644c2cde@ec2-44-205-64-253.compute-1.amazonaws.com:5432/d12bu3q353rq9g
+      isolation_level: read-committed
+      use_prepared_statements: false
+  customization:
+    naming_convention: hasura-default
+  tables: "!include default/tables/tables.yaml"
