@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../view/LandingPage.vue";
 import signup from "../view/signup.vue";
 import Home from "../view/HomePage.vue";
+import contact from "../view/contact.vue";
 import login from "../view/login.vue";
 // import notfound from "../view/notFound.vue";
 
@@ -10,6 +11,7 @@ const router = createRouter({
   routes: [
     { path: "/", component: LandingPage, name: "LandingPage" },
     { path: "/home", component: Home, name: "Home" },
+    { path: "/contact", component: contact, name: "contact" },
     { path: "/signup", component: signup, name: "signup" },
     { path: "/login", component: login, name: "login" },
     {

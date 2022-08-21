@@ -6,7 +6,7 @@ import navbar from "../components/navbar.vue";
     <navbar />
     <div class="hero min-h-screen bg-base-200 flex items-center">
       <div
-        class="hero-content mt-4 flex flex-row justify-center items-center jus lg:flex-row"
+        class="hero-content mt-4 flex flex-col justify-center items-center lg:flex-row"
       >
         <div class="basis-1/4 mr-8">
           <img
@@ -21,8 +21,9 @@ import navbar from "../components/navbar.vue";
             a recipe, you can jump right into making it now, or put it on your
             favorite section and come back later.
           </p>
-          <button
-            class="bg-red-500 border border-red-500 shadow hover:bg-red-600 p-2 rounded-sm text-white flex items-center focus:outline-none focus:shadow-outline"
+          <router-link
+            to="/login"
+            class="bg-red-500 border border-red-500 shadow hover:bg-red-600 w-60 p-2 rounded-sm text-white flex items-center focus:outline-none focus:shadow-outline"
           >
             <span class="mx-10 pl-4"> Get Started</span>
             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -35,7 +36,7 @@ import navbar from "../components/navbar.vue";
                 stroke-linecap="round"
               />
             </svg>
-          </button>
+          </router-link>
         </div>
       </div>
     </div>

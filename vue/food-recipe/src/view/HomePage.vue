@@ -5,11 +5,11 @@ import cards from "../components/cards.vue";
 import status from "../components/status.vue";
 </script>
 <template>
-  <div>
+  <div class="flex flex-col justify-center items-center">
     <navBar />
-    <status />
 
-    <cards class="flex justify-center mt-8 p-2" />
+    <cards />
+
     <footerVue />
   </div>
 </template>
