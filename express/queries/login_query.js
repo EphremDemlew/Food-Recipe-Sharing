@@ -5,11 +5,9 @@ query login($email: String!){
 		id
     email
     password
-    isAuthor
     first_name
     last_name
   }
 }
 `;
-
 module.exports = LOGIN_HASURA_OPERATION;

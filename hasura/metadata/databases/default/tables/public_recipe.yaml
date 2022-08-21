@@ -1,0 +1,72 @@
+table:
+  name: recipe
+  schema: public
+array_relationships:
+  - name: Ingredients
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: Ingredients
+          schema: public
+  - name: favorites
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: favorite
+          schema: public
+  - name: images
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: images
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      columns:
+        - likes
+        - name
+        - user_id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - likes
+        - name
+        - time
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - likes
+        - name
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - likes
+        - name
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: user
+    permission:
+      backend_only: false
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

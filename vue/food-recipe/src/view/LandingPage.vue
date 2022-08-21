@@ -1,9 +1,6 @@
-<script setup>
-import navbar from "../components/navbar.vue";
-</script>
+<script setup></script>
 <template>
-  <div>
-    <navbar />
+  <div class="md:mt-8">
     <div class="hero min-h-screen bg-base-200 flex items-center">
       <div
         class="hero-content mt-4 flex flex-col justify-center items-center lg:flex-row"

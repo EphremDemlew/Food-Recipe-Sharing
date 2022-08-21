@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <div>
+  <div class="md:mt-24">
     <section class="text-black body-font">
       <div class="container px-5 pb-24 mx-auto flex flex-col">
         <div class="lg:w-4/6 mx-auto">

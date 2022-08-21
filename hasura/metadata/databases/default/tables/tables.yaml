@@ -1,1 +1,5 @@
-[]
+- "!include public_Ingredients.yaml"
+- "!include public_favorite.yaml"
+- "!include public_images.yaml"
+- "!include public_recipe.yaml"
+- "!include public_users.yaml"

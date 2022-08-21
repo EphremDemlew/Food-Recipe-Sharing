@@ -1,15 +1,7 @@
-<script setup>
-import { ref } from "vue";
-
-defineProps({
-  msg: String,
-});
-
-const count = ref(0);
-</script>
+<script setup></script>
 
 <template>
-  <footer class="px-10 bg-white sm:py-6 w-screen dark:bg-gray-900">
+  <footer class="w-screen px-10 bg-white sm:py-6 dark:bg-gray-900">
     <div class="md:flex md:justify-between">
       <div class="mb-6 md:mb-0">
         <router-link to="/" class="flex items-center">

@@ -12,17 +12,19 @@
             If you are already a member, easily log in
           </p>
 
-          <form action="" class="flex flex-col gap-4">
+          <form @submit.prevent="addUser" class="flex flex-col gap-4">
             <input
               class="p-2 mt-8 rounded-xl border"
               type="email"
               name="email"
+              v-model="email"
               placeholder="Email"
             />
             <div class="relative">
               <input
                 class="p-2 rounded-xl border w-full"
                 type="password"
+                v-model="password"
                 name="password"
                 placeholder="Password"
               />
@@ -80,8 +82,27 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "InputWithIconAtStart",
+<script setup>
+import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { useQuery, useMutation } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+
+const email = ref("");
+const password = ref("");
+
+const store = useStore();
+
+const addUser = () => {
+  const userData = gql`
+    query login {
+      login(email: "test@gmail.com", password: "123321") {
+        token
+      }
+    }
+  `;
+  const { result, error, loading } = useQuery(userData);
+  console.log(result);
+  if (error) console.log("finally error");
 };
 </script>

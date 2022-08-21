@@ -5,11 +5,7 @@ import cards from "../components/cards.vue";
 import status from "../components/status.vue";
 </script>
 <template>
-  <div class="flex flex-col justify-center items-center">
-    <navBar />
-
+  <div class="md:mt-32">
     <cards />
-
-    <footerVue />
   </div>
 </template>

@@ -98,8 +98,8 @@
     </div>
   </div> -->
 
-  <div>
-    <div class="container">
+  <div class="">
+    <div class="container flex justify-center items-center lg:mt-24">
       <div
         class="bg-teal-400 w-1/3 bg-opacity-25 rounded-lg p-6 text-black-100 z-10"
         style="cursor: auto"
