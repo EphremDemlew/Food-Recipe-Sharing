@@ -101,7 +101,7 @@
   <div>
     <div class="container">
       <div
-        class="bg-teal-400 w-1/3 bg-opacity-25 rounded-lg p-6 text-black-100 relative z-10"
+        class="bg-teal-400 w-1/3 bg-opacity-25 rounded-lg p-6 text-black-100 z-10"
         style="cursor: auto"
       >
         <div class="flex flex-wrap items-center">

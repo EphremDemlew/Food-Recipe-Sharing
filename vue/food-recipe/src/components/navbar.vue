@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <div class="lg:my-14">
+  <div class="lg:mt-24">
     <nav
       class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600"
     >
@@ -8,11 +8,7 @@
         class="container flex flex-wrap justify-between items-center mx-auto"
       >
         <a href="#" class="flex items-center">
-          <img
-            src="../assets/hot-pot.png"
-            class="mr-3 h-6 sm:h-9"
-            alt="Flowbite Logo"
-          />
+          <img src="../assets/hot-pot.png" class="mr-3 h-6 sm:h-9" alt="Logo" />
           <span
             class="self-center text-red-500 font-serif text-xl font-semibold whitespace-nowrap dark:text-white"
             >Eph</span
@@ -66,8 +62,7 @@
             <li>
               <router-link
                 to="/home"
-                class="block font-bold py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                aria-current="page"
+                class="text-red-500 block font-bold py-2 focus:text-blue-600 pr-4 pl-3 bg-blue-50 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                 >Home</router-link
               >
             </li>
@@ -75,23 +70,23 @@
               <router-link
                 to="/contact"
                 aria-current="page"
-                class="block py-2 font-bold pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                class="block py-2 focus:text-blue-600 font-bold pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >Contact</router-link
               >
             </li>
             <li>
               <router-link
-                to="/contact"
+                to="/favorite"
                 aria-current="page"
-                class="block py-2 font-bold pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                class="focus:text-blue-600 block py-2 font-bold pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >Favorite</router-link
               >
             </li>
             <li>
               <router-link
-                to="/contact"
+                to="/profile"
                 aria-current="page"
-                class="block py-2 font-bold pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                class="focus:text-blue-600 block py-2 font-bold pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >Profile</router-link
               >
             </li>

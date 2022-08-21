@@ -4,7 +4,8 @@ import signup from "../view/signup.vue";
 import Home from "../view/HomePage.vue";
 import contact from "../view/contact.vue";
 import login from "../view/login.vue";
-// import notfound from "../view/notFound.vue";
+import favorite from "../view/favorite.vue";
+import profile from "../view/profile.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +15,8 @@ const router = createRouter({
     { path: "/contact", component: contact, name: "contact" },
     { path: "/signup", component: signup, name: "signup" },
     { path: "/login", component: login, name: "login" },
+    { path: "/favorite", component: favorite, name: "favorite" },
+    { path: "/profile", component: profile, name: "profile" },
     {
       path: "/:pathMatch(.*)*",
       component: () => import("../view/notFound.vue"),
