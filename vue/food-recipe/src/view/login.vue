@@ -1,3 +1,43 @@
+<script setup>
+import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+// provide(ApolloClients, apolloClients);
+
+const email = ref("");
+const password = ref("");
+
+const store = useStore();
+
+const addUser = () => {
+  const userData = gql`
+    query logins($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        id
+        token
+      }
+    }
+
+    # query users {
+    #   users {
+    #     id
+    #     email
+    #     first_name
+    #   }
+    # }
+  `;
+  const { result, error, loading } = useQuery(userData, {
+    variables: {
+      email: email.value,
+      password: password.value,
+    },
+  });
+  // console.log(result.value.login.token);
+  console.log(result);
+};
+</script>
+
 <template>
   <div>
     <section class="bg-gray-50 min-h-screen flex items-center justify-center">
@@ -79,30 +119,20 @@
         </div>
       </div>
     </section>
+    <div>
+      <div v-if="error">
+        <h1>error</h1>
+      </div>
+      <div v-if="loading"><h1>loading</h1></div>
+      <div
+        v-else
+        v-for="ppl in result.logins"
+        :key="ppl.id"
+        class="p-4 md:w-1/3 sm:mb-0 mb-6"
+      >
+        <h1>ID</h1>
+        <h1>{{ ppl.email }}</h1>
+      </div>
+    </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "@vue/reactivity";
-import { useStore } from "vuex";
-import { useQuery, useMutation } from "@vue/apollo-composable";
-import gql from "graphql-tag";
-
-const email = ref("");
-const password = ref("");
-
-const store = useStore();
-
-const addUser = () => {
-  const userData = gql`
-    query login {
-      login(email: "test@gmail.com", password: "123321") {
-        token
-      }
-    }
-  `;
-  const { result, error, loading } = useQuery(userData);
-  console.log(result);
-  if (error) console.log("finally error");
-};
-</script>

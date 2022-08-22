@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <footer class="w-screen px-10 bg-white sm:py-6 dark:bg-gray-900">
+  <footer class="w-screen px-10 bg-white sm:py-6 dark:bg-gray-900 lg:mt-16">
     <div class="md:flex md:justify-between">
       <div class="mb-6 md:mb-0">
         <router-link to="/" class="flex items-center">

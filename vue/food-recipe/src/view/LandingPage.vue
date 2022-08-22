@@ -1,6 +1,25 @@
-<script setup></script>
+<script setup>
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import cards from "../components/cards.vue";
+import Search from "../components/search.vue";
+import { recipe_query } from "../graphql/index";
+// import { computed } from "vue";
+// import { useStore } from "vuex";
+// const store = useStore();
+// const val = computed(() => {
+//   return store.getters?.recipe;
+// });
+
+const { result, loading, error, onResult } = useQuery(recipe_query);
+console.log(result);
+// onResult((result) => {
+//   console.log("result=", result.data);
+//   store?.commit("setRecipe", result.data);
+// });
+</script>
 <template>
-  <div class="md:mt-8">
+  <div class="md:mt-8 w-screen">
     <div class="hero min-h-screen bg-base-200 flex items-center">
       <div
         class="hero-content mt-4 flex flex-col justify-center items-center lg:flex-row"
@@ -35,6 +54,17 @@
             </svg>
           </router-link>
         </div>
+      </div>
+    </div>
+    <search />
+    <div class="flex border-5 justify-evenly">
+      <div v-for="rec in result.recipe" :key="rec.recipe">
+        <cards
+          class="flex w-96 justify-center"
+          :title="rec.name"
+          :img_url="rec.images[0].image_url"
+          :like="result.likes"
+        />
       </div>
     </div>
   </div>

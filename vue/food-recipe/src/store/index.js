@@ -5,6 +5,7 @@ const store = createStore({
     return {
       user: null,
       token: null,
+      recipe: null,
     };
   },
   getters: {
@@ -14,6 +15,9 @@ const store = createStore({
     token(state) {
       return state.token;
     },
+    recipe(state) {
+      return state.recipe;
+    },
   },
   mutations: {
     setUser(state, payload) {
@@ -21,6 +25,9 @@ const store = createStore({
     },
     setToken(state, payload) {
       state.token = payload;
+    },
+    setRecipe(state, payload) {
+      state.recipe = payload;
     },
   },
 });

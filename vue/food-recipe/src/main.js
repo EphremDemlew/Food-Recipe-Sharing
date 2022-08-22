@@ -1,10 +1,23 @@
+// import { createApp, provide, h } from "vue";
+// import App from "./App.vue";
+// import "./index.css";
+// import router from "./router/router.js";
+
+// const app = createApp({
+//   setup() {
+//     provide(DefaultApolloClient, apolloClient);
+//   },
+//   render: () => h(App),
+// });
+// app.use(router).mount("#app");
+
+import { DefaultApolloClient } from "@vue/apollo-composable";
+import apolloClient from "./ApolloClient.js";
 import { createApp, provide, h } from "vue";
 import App from "./App.vue";
 import "./index.css";
-import store from "./store";
-import router from "./router/router.js";
-import apolloClient from "./ApolloClient.js";
-import { DefaultApolloClient } from "@vue/apollo-composable";
+import router from "./router/router";
+import store from "./store/index.js";
 
 const app = createApp({
   setup() {
@@ -12,5 +25,7 @@ const app = createApp({
   },
 
   render: () => h(App),
-});
-app.use(router).use(store).mount("#app");
+})
+  .use(router)
+  .use(store)
+  .mount("#app");

@@ -3,6 +3,9 @@ actions:
     definition:
       kind: ""
       handler: http://localhost:5000/login
+    permissions:
+      - role: anonymous
+      - role: user
   - name: sign_up
     definition:
       kind: synchronous
