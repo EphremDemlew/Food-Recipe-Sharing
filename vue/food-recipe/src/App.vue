@@ -6,11 +6,11 @@ import navbar from "./components/navbar.vue";
 </script>
 
 <template>
-  <div class="w-screen bg-green-200">
+  <div class="w-screen">
     <navbar />
     <router-view></router-view>
     <footerPart />
   </div>
 </template>
 
-<style scoped></style>
+<style></style>

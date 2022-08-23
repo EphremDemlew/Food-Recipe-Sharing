@@ -9,7 +9,7 @@ defineProps({
 <template>
   <div class="flex justify-center items-center lg:mt-20">
     <div
-      class="bg-white rounded-lg p-6 text-black-100 z-10"
+      class="bg-gray-400 rounded-lg p-6 text-black-100 z-10 shadow-2xl"
       style="cursor: auto"
     >
       <div class="flex flex-wrap items-center">
@@ -46,29 +46,84 @@ defineProps({
 
         <div class="w-full pt-8 flex flex-col justify-between">
           <div>
-            <h2 class="font-bold text-xl">
-              {{ title }}
-            </h2>
-
-            <div class="flex flex-wrap text-center justify-between pt-4 mb-2">
-              <button
-                type="button"
-                class="inline-flex items-center px-5 py-2.5 text-sm border-2 border-gray-500 font-medium text-center text-black rounded-lg hover:bg-[#002D74] hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Likes
-
-                <span
-                  class="inline-flex justify-center items-center ml-2 w-4 h-4 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full"
+            <div class="flex justify-between">
+              <div class="font-bold text-xl">
+                {{ title }}
+              </div>
+              <div>
+                <button
+                  class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-1 cursor-auto border-green-700 bg-green-500 text-green-900"
                 >
-                  {{ like }}
-                </span>
-              </button>
-
-              <button
-                class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-2 border-green-600 bg-green-400 text-green-900"
+                  {{ time }} 0 min
+                </button>
+              </div>
+            </div>
+            <div class="flex flex-wrap text-center justify-between pt-4 mb-2">
+              <div
+                class="flex flex-col justify-between w-full md:flex-row md:justify-center"
               >
-                2 min
-              </button>
+                <div class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-yellow-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                  </svg>
+                  <svg
+                    class="w-5 h-5 text-yellow-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                  </svg>
+                  <svg
+                    class="w-5 h-5 text-yellow-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                  </svg>
+                  <svg
+                    class="w-5 h-5 text-yellow-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                  </svg>
+                  <svg
+                    class="w-5 h-5 text-gray-300 dark:text-gray-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <div
+                    class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    <i
+                      class="fa-solid fa-bookmark text-yellow-500 text-xl lg:mr-5"
+                    ></i>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <p class="text-xs leading-relaxed text-black -50">
@@ -78,27 +133,15 @@ defineProps({
           </div>
 
           <div class="w-full sm:flex-1 grid gap-4 grid-cols-2 pt-6">
-            <a
-              href="https://stackdiary.com/"
-              class="flex items-center justify-center text-center relative text-white font-bold text-sm bg-gray-200 text-gray-800 px-8 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75"
-              >Add to Favorite
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                enable-background="new 0 0 24 24"
-                viewBox="0 0 24 24"
-                id="IconChangeColor"
-                height="25"
-                width="25"
+            <i
+              class="fa-solid fa-thumbs-up text-[#002D74] hover:text-[#001172] cursor-pointer"
+            >
+              <span
+                class="inline-flex justify-center items-center ml-2 w-4 h-4 text-xs font-semibold text-blue-800 bg-transparent rounded-full"
               >
-                <path
-                  d="M22,10.1c0.1-0.5-0.3-1.1-0.8-1.1l-5.7-0.8L12.9,3c-0.1-0.2-0.2-0.3-0.4-0.4C12,2.3,11.4,2.5,11.1,3L8.6,8.2L2.9,9C2.6,9,2.4,9.1,2.3,9.3c-0.4,0.4-0.4,1,0,1.4l4.1,4l-1,5.7c0,0.2,0,0.4,0.1,0.6c0.3,0.5,0.9,0.7,1.4,0.4l5.1-2.7l5.1,2.7c0.1,0.1,0.3,0.1,0.5,0.1l0,0c0.1,0,0.1,0,0.2,0c0.5-0.1,0.9-0.6,0.8-1.2l-1-5.7l4.1-4C21.9,10.5,22,10.3,22,10.1z"
-                  id="mainIconPathAttribute"
-                  fill="orange"
-                  stroke-width="0"
-                  stroke="rgba(0, 0, 0, 0)"
-                ></path>
-              </svg>
-            </a>
+                {{ like }}2
+              </span>
+            </i>
 
             <button
               x-on:click="pay('Essential')"

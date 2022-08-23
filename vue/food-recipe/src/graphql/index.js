@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const recipe_query = gql`
-  query recipe {
+  query recipes {
     recipe {
       name
       likes

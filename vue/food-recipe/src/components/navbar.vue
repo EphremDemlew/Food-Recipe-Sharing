@@ -4,13 +4,13 @@
     class="bg-white px-2 sm:px-4 py-5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600"
   >
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-      <a href="#" class="flex items-center">
+      <router-link to="/" class="flex items-center">
         <img src="../assets/hot-pot.png" class="mr-3 h-6 sm:h-9" alt="Logo" />
         <span
           class="self-center text-red-500 font-serif text-xl font-semibold whitespace-nowrap dark:text-white"
           >Eph</span
         >
-      </a>
+      </router-link>
       <div class="flex md:order-2">
         <router-link
           to="/login"

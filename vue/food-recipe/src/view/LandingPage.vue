@@ -57,8 +57,10 @@ console.log(result);
       </div>
     </div>
     <search />
-    <div class="flex border-5 justify-evenly">
-      <div v-for="rec in result.recipe" :key="rec.recipe">
+    <div
+      class="flex flex-col border-5 justify-center md:flex-row md:justify-evenly"
+    >
+      <div v-for="rec in result.recipe" :key="rec.name">
         <cards
           class="flex w-96 justify-center"
           :title="rec.name"

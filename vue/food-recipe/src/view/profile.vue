@@ -48,3 +48,9 @@
     </section>
   </div>
 </template>
+<style scoped>
+body {
+  background-image: url(../assets/14589.jpg);
+  background-size: cover;
+}
+</style>
