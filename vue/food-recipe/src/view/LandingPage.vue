@@ -37,8 +37,8 @@ console.log(result);
             a recipe, you can jump right into making it now, or put it on your
             favorite section and come back later.
           </p>
-          <router-link
-            to="/login"
+          <a
+            href="#search"
             class="bg-red-500 border border-red-500 shadow hover:bg-red-600 w-60 p-2 rounded-sm text-white flex items-center focus:outline-none focus:shadow-outline"
           >
             <span class="mx-10 pl-4"> Get Started</span>
@@ -52,13 +52,15 @@ console.log(result);
                 stroke-linecap="round"
               />
             </svg>
-          </router-link>
+          </a>
         </div>
       </div>
     </div>
     <search />
+
     <div
-      class="flex flex-col border-5 justify-center md:flex-row md:justify-evenly"
+      id="search"
+      class="flex flex-col justify-center md:flex-row md:justify-evenly"
     >
       <div v-for="rec in result.recipe" :key="rec.name">
         <cards

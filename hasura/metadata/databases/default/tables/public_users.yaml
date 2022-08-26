@@ -17,17 +17,6 @@ array_relationships:
           name: recipe
           schema: public
 select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-        - email
-        - first_name
-        - last_name
-        - password
-        - created_at
-        - updated_at
-        - id
-      filter: {}
   - role: user
     permission:
       columns:
