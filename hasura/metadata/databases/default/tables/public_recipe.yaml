@@ -13,6 +13,13 @@ array_relationships:
         table:
           name: Ingredients
           schema: public
+  - name: comments
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: comment
+          schema: public
   - name: favorites
     using:
       foreign_key_constraint_on:
@@ -26,6 +33,13 @@ array_relationships:
         column: recipe_id
         table:
           name: images
+          schema: public
+  - name: ratings
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: rating
           schema: public
 insert_permissions:
   - role: user

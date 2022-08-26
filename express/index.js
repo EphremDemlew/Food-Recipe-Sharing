@@ -148,7 +148,7 @@ app.post("/Login", async (req, res) => {
 });
 
 // Request Handler
-// app.post("/addBook", fileUploade);
+// app.post("/addRecipe", fileUploade);
 
 const port = process.env.PORT || 5050;
 app.listen(port, () => {
