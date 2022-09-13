@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
   <nav
-    class="bg-red-50 bg-opacity-80 blur-0 backdrop-blur px-2 sm:px-4 py-5 fixed w-full z-20 top-0 left-0"
+    class="bg-opacity-80 blur-0 backdrop-blur px-2 sm:px-4 py-5 fixed w-full z-20 top-0 left-0"
   >
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <router-link to="/" class="flex items-center">

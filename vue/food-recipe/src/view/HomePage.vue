@@ -6,6 +6,7 @@ import status from "../components/status.vue";
 import { useQuery } from "@vue/apollo-composable";
 import { recipe_query } from "../graphql/index";
 import Search from "../components/search.vue";
+import Loading from "../components/loading.vue";
 
 const { result, loading, error } = useQuery(recipe_query);
 </script>
@@ -28,16 +29,10 @@ const { result, loading, error } = useQuery(recipe_query);
           />
         </div>
       </div>
-      <div v-if="loading">
-        <div class="flex justify-center items-center">
-          <div
-            class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
-            role="status"
-          >
-            <span class="visually-hidden"></span>
-          </div>
-        </div>
+      <div v-if="loading" class="flex justify-center items-center">
+        <loading></loading>
       </div>
+
       <div v-if="error">
         <div class="flex justify-center items-center">
           <div
