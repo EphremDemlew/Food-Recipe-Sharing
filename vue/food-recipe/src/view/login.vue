@@ -1,57 +1,14 @@
-<script setup>
-import { ref } from "@vue/reactivity";
-import { useQuery, useMutation } from "@vue/apollo-composable";
-import gql from "graphql-tag";
-import { useRouter } from "vue-router";
-import { login_query } from "../graphql";
-import { userLoginStore } from "../stores/user";
-const user = userLoginStore();
-const router = useRouter();
-
-// store.user.name;
-// provide(ApolloClients, apolloClients);
-
-const email = ref("");
-const password = ref("");
-const text = ref("");
-
-// const store = useStore();
-const {
-  mutate: login,
-  loading: loading,
-  error: error,
-  onDone,
-} = useMutation(login_query, () => ({
-  variables: {
-    email: email.value,
-    password: password.value,
-  },
-}));
-
-const loginUser = async () => {
-  login();
-  onDone((res) => {
-    if (res.data) {
-      const token = res.data.login.token;
-      const Id = res.data.login.id;
-      const name = res.data.login.first_name;
-      const email = res.data.login.email;
-      const createdDate = res.data.login.created_at;
-      user.login(token, Id, createdDate, name, email);
-      router.push("/home");
-
-      email.value = "";
-      password.value = "";
-      return;
-    }
-  });
-};
-</script>
-
 <template>
   <section
     class="min-h-screen flex items-center justify-center hero pt-36 pb-20"
   >
+    <div
+      v-if="check == true"
+      class="mt-5 absolute z-10 bottom-0 right-0 p-5 leading-normal text-white bg-red-500 rounded-lg"
+      role="alert"
+    >
+      <p>A simple basic danger alert with filled background</p>
+    </div>
     <!-- login container -->
     <div
       class="bg-transparent text-center shadow-2xl flex rounded-2xl max-w-3xl p-5 items-center backdrop-blur"
@@ -152,6 +109,63 @@ const loginUser = async () => {
     </div>
   </section>
 </template>
+<script setup>
+import { ref } from "@vue/reactivity";
+import { useQuery, useMutation } from "@vue/apollo-composable";
+import { useRouter } from "vue-router";
+import { login_query } from "../graphql";
+import { userLoginStore } from "../stores/user";
+import { computed } from "@vue/runtime-core";
+const user = userLoginStore();
+const router = useRouter();
+
+// store.user.name;
+// provide(ApolloClients, apolloClients);
+
+const email = ref("");
+const password = ref("");
+const check = ref(false);
+
+// const store = useStore();
+const {
+  mutate: login,
+  loading: loading,
+  error: error,
+  onDone,
+} = useMutation(login_query, () => ({
+  variables: {
+    email: email.value,
+    password: password.value,
+  },
+}));
+
+const loginUser = async () => {
+  login();
+  onDone((res) => {
+    if (res.data) {
+      const token = res.data.login.token;
+      const Id = res.data.login.id;
+      const name = res.data.login.first_name;
+      const email = res.data.login.email;
+      const createdDate = res.data.login.created_at;
+      user.login(token, Id, createdDate, name, email);
+      toste();
+      router.push("/home");
+
+      email.value = "";
+      password.value = "";
+      return;
+    }
+  });
+};
+// function toste() {
+//   setTimeout(() => {
+//     check.value = true;
+//   }, 4000);
+//   check.value = false;
+
+// }
+</script>
 
 <style scoped>
 .hero {

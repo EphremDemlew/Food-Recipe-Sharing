@@ -20,6 +20,13 @@ array_relationships:
         table:
           name: comment
           schema: public
+  - name: commentsByRecipeId
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: comments
+          schema: public
   - name: favorites
     using:
       foreign_key_constraint_on:
