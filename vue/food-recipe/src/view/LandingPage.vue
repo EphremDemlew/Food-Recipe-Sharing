@@ -27,7 +27,7 @@ console.log(error);
 <template>
   <div class="md:mt-8 w-full">
     <div
-      class="hero min-h-screen w-full bg-base-200 flex items-center justify-center"
+      class="hero min-h-screen w-full bg-base-200 flex items-center justify-center -mt-10"
     >
       <div
         class="hero-content mt-4 flex flex-col justify-evenly items-center md:flex-row md:ml-20"
@@ -91,3 +91,12 @@ console.log(error);
     </div>
   </div>
 </template>
+
+<style>
+.hero {
+  background-image: url(../assets/bannerbackground.png);
+  background-attachment: scroll;
+  background-position: center bottom;
+  background-size: cover;
+}
+</style>
