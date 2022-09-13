@@ -1,4 +1,3 @@
-<script setup></script>
 <template>
   <div class="md:mt-24">
     <section class="text-black body-font">
@@ -28,18 +27,23 @@
                 class="flex flex-col items-center text-center justify-center"
               >
                 <h2 class="font-medium title-font mt-4 text-Black text-lg">
-                  User Name
+                  Name
                 </h2>
                 <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
-                <p class="text-base text-gray-400">Email</p>
-                <p class="text-base text-gray-400">Phone Number</p>
+                <p class="text-base text-gray-400">{{ user.name }}</p>
+
+                <h2 class="font-medium title-font mt-4 text-Black text-lg">
+                  Email
+                </h2>
+                <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
+                <p class="text-base text-gray-400">{{ user.name }}</p>
               </div>
             </div>
             <div
               class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-blue-100 sm:border-t-0 border-t mt-8 pt-4 sm:mt-0 text-center sm:text-left"
             >
-              <p class="leading-relaxed text-lg mb-4">
-                Details about the person is writteen here.
+              <p class="leading-relaxed text-lg mb-4 w-96">
+                <img src="../assets/man.png" alt="" />
               </p>
             </div>
           </div>
@@ -48,6 +52,11 @@
     </section>
   </div>
 </template>
+
+<script setup>
+import { userLoginStore } from "../stores/user";
+const user = userLoginStore();
+</script>
 <style scoped>
 body {
   background-image: url(../assets/14589.jpg);

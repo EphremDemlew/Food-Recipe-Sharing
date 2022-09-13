@@ -1,8 +1,13 @@
 <script setup>
 import { userLoginStore } from "../stores/user";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const user = userLoginStore();
 
 const logoutUser = () => {
+  console.log(user.name);
+  console.log(user.createdDate);
+  console.log(user);
   user.logout();
   router.push("/login");
 };
@@ -37,13 +42,15 @@ const logoutUser = () => {
           Sign Up
         </router-link>
 
-        <div class="flex items-center space-x-4" v-if="user.isLoggedIn == true">
+        <div
+          class="flex items-center space-x-4 cursor-pointer"
+          v-if="user.isLoggedIn == true"
+          @click="router.push('/profile')"
+        >
           <img class="w-10 h-10 rounded-full" src="../assets/man.png" alt="" />
           <div class="font-medium dark:text-white">
-            <div>Jese Leos</div>
-            <div class="text-sm text-gray-500 dark:text-gray-400">
-              Joined in August 2014
-            </div>
+            <div>Hi! {{ user.name }}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-800">WellCome</div>
           </div>
         </div>
         <router-link

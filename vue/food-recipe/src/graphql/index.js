@@ -18,6 +18,8 @@ export const login_query = gql`
     login(email: $email, password: $password) {
       id
       token
+      first_name
+      created_at
     }
   }
 `;

@@ -7,6 +7,7 @@ query login($email: String!){
     password
     first_name
     last_name
+    created_at
   }
 }
 `;

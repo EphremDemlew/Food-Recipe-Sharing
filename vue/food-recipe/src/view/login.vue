@@ -2,10 +2,11 @@
 import { ref } from "@vue/reactivity";
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { login_query } from "../graphql";
 import { userLoginStore } from "../stores/user";
 const user = userLoginStore();
+const router = useRouter();
 
 // store.user.name;
 // provide(ApolloClients, apolloClients);
@@ -20,62 +21,30 @@ const {
   loading: loading,
   error: error,
   onDone,
-} = useMutation(
-  gql`
-    mutation logins($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
-        id
-        token
-      }
-    }
-  `,
-  () => ({
-    variables: {
-      email: email.value,
-      password: password.value,
-    },
-  })
-);
+} = useMutation(login_query, () => ({
+  variables: {
+    email: email.value,
+    password: password.value,
+  },
+}));
 
 const loginUser = async () => {
+  login();
   onDone((res) => {
-    console.log(res.data);
     if (res.data) {
       const token = res.data.login.token;
-      const userId = res.data.login.id;
-      user.login(token, userId);
+      const Id = res.data.login.id;
+      const name = res.data.login.first_name;
+      const email = res.data.login.email;
+      const createdDate = res.data.login.created_at;
+      user.login(token, Id, createdDate, name, email);
       router.push("/home");
+
+      email.value = "";
+      password.value = "";
+      return;
     }
   });
-  console.log(res.data.login.id);
-  console.log(res.data.login.token);
-
-  // const { mutate:login,onDone } = await useMutation(login_query,
-  //   const { mutate:login,onDone } = await useMutation(login_query, {
-  //     variables: {
-  //       email: email.value,
-  //       password: password.value,
-  //     },
-  //   });
-  //   onDone((result) => {
-  //     console.log(result);
-  //   });
-  //   console.log(result);
-  //   console.log(error);
-  //   console.log(loading);
-  //   email.value = "";
-  //   password.value = "";
-  //   // // console.log(result.value.login.token);
-  //   // console.log("the login");
-  //   // console.log(result);
-  //   // console.log(loading);
-  //   // store.changeName(email.value);
-  //   // email.value = "";
-  //   // console.log("Name .....................");
-  //   // console.log(store.user.name);
-  //   // console.log("WEbbb .....................");
-  //   // console.log(store.wb);
-  //   // console.log(store.user.wb);
 };
 </script>
 
@@ -85,7 +54,7 @@ const loginUser = async () => {
   >
     <!-- login container -->
     <div
-      class="bg-transparent flex shadow-lg rounded-2xl max-w-3xl p-5 items-center backdrop-blur"
+      class="bg-transparent text-center shadow-2xl flex rounded-2xl max-w-3xl p-5 items-center backdrop-blur"
     >
       <!-- form -->
       <div class="md:w-1/2 px-8 md:px-16">
@@ -177,7 +146,7 @@ const loginUser = async () => {
       <div class="md:block hidden w-1/2">
         <img
           class="rounded-2xl"
-          src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+          src="../assets/vadim-markin-Dn82UF7qsso-unsplash.jpg"
         />
       </div>
     </div>

@@ -10,7 +10,7 @@
       >
         <!-- form -->
         <div class="">
-          <h2 class="font-bold mt-8 text-2xl text-red-500">Sign up</h2>
+          <h2 class="font-bold mt-8 text-2xl text-[#002D74]">Sign up</h2>
 
           <form action="" class="flex flex-col gap-4 w-96">
             <input
