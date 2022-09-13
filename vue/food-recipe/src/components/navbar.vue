@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+import { userLoginStore } from "../stores/user";
+const user = userLoginStore();
+
+const logoutUser = () => {
+  user.logout();
+  router.push("/login");
+};
+</script>
 <template>
   <nav
     class="bg-opacity-80 blur-0 backdrop-blur px-2 sm:px-4 py-5 fixed w-full z-20 top-0 left-0"
@@ -13,6 +21,7 @@
       </router-link>
       <div class="flex md:order-2">
         <router-link
+          v-if="user.isLoggedIn == false"
           to="/login"
           type="button"
           class="text-white w-32 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -20,11 +29,31 @@
           Login
         </router-link>
         <router-link
+          v-if="user.isLoggedIn == false"
           to="/signup"
           type="button"
           class="text-white w-32 ml-10 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Sign Up
+        </router-link>
+
+        <div class="flex items-center space-x-4" v-if="user.isLoggedIn == true">
+          <img class="w-10 h-10 rounded-full" src="../assets/man.png" alt="" />
+          <div class="font-medium dark:text-white">
+            <div>Jese Leos</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+              Joined in August 2014
+            </div>
+          </div>
+        </div>
+        <router-link
+          v-if="user.isLoggedIn == true"
+          to="/signup"
+          type="button"
+          @click="logoutUser"
+          class="text-white w-32 ml-10 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Logout
         </router-link>
         <button
           data-collapse-toggle="navbar-sticky"
@@ -59,7 +88,7 @@
           <li>
             <router-link
               to="/home"
-              class="block py-2 font-bold pr-4 pl-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              class="block py-2 font-bold pr-4 pl-3 text-[#002D74] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Home</router-link
             >
           </li>
@@ -67,7 +96,7 @@
             <router-link
               to="/contact"
               aria-current="page"
-              class="block py-2 focus:text-blue-600 font-bold pr-4 pl-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              class="block py-2 focus:text-blue-600 font-bold pr-4 pl-3 text-[#002D74] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Contact</router-link
             >
           </li>
@@ -75,7 +104,7 @@
             <router-link
               to="/favorite"
               aria-current="page"
-              class="focus:text-blue-600 block py-2 font-bold pr-4 pl-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              class="focus:text-blue-600 block py-2 font-bold pr-4 pl-3 text-[#002D74] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Favorite</router-link
             >
           </li>
@@ -83,7 +112,7 @@
             <router-link
               to="/profile"
               aria-current="page"
-              class="focus:text-blue-600 block py-2 font-bold pr-4 pl-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              class="focus:text-blue-600 block py-2 font-bold pr-4 pl-3 text-[#002D74] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Profile</router-link
             >
           </li>

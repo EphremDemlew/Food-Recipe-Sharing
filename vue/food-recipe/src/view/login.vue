@@ -1,41 +1,81 @@
 <script setup>
 import { ref } from "@vue/reactivity";
-// import { useStore } from "vuex";
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
+import { useRoute } from "vue-router";
 import { login_query } from "../graphql";
-import { useUserStore } from "../stores/user";
-const store = useUserStore();
+import { userLoginStore } from "../stores/user";
+const user = userLoginStore();
 
-store.user.name;
+// store.user.name;
 // provide(ApolloClients, apolloClients);
 
 const email = ref("");
 const password = ref("");
+const text = ref("");
 
 // const store = useStore();
-
-const addUser = () => {
-  // console.log(",.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-  // console.log(email.value, password.value);
-  const { result, error, loading } = useMutation(login_query, {
+const {
+  mutate: login,
+  loading: loading,
+  error: error,
+  onDone,
+} = useMutation(
+  gql`
+    mutation logins($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        id
+        token
+      }
+    }
+  `,
+  () => ({
     variables: {
       email: email.value,
       password: password.value,
     },
-  });
-  // // console.log(result.value.login.token);
-  // console.log("the login");
-  // console.log(result);
-  // console.log(loading);
+  })
+);
 
-  // store.changeName(email.value);
-  // email.value = "";
-  // console.log("Name .....................");
-  // console.log(store.user.name);
-  // console.log("WEbbb .....................");
-  // console.log(store.wb);
-  // console.log(store.user.wb);
+const loginUser = async () => {
+  onDone((res) => {
+    console.log(res.data);
+    if (res.data) {
+      const token = res.data.login.token;
+      const userId = res.data.login.id;
+      user.login(token, userId);
+      router.push("/home");
+    }
+  });
+  console.log(res.data.login.id);
+  console.log(res.data.login.token);
+
+  // const { mutate:login,onDone } = await useMutation(login_query,
+  //   const { mutate:login,onDone } = await useMutation(login_query, {
+  //     variables: {
+  //       email: email.value,
+  //       password: password.value,
+  //     },
+  //   });
+  //   onDone((result) => {
+  //     console.log(result);
+  //   });
+  //   console.log(result);
+  //   console.log(error);
+  //   console.log(loading);
+  //   email.value = "";
+  //   password.value = "";
+  //   // // console.log(result.value.login.token);
+  //   // console.log("the login");
+  //   // console.log(result);
+  //   // console.log(loading);
+  //   // store.changeName(email.value);
+  //   // email.value = "";
+  //   // console.log("Name .....................");
+  //   // console.log(store.user.name);
+  //   // console.log("WEbbb .....................");
+  //   // console.log(store.wb);
+  //   // console.log(store.user.wb);
 };
 </script>
 
@@ -43,12 +83,6 @@ const addUser = () => {
   <section
     class="min-h-screen flex items-center justify-center hero pt-36 pb-20"
   >
-    <div>
-      <h1>The Name is {{ store.user.name }}</h1>
-      <h1>Email {{ store.user.email }}</h1>
-      <h1>Web is {{ store.wb }}</h1>
-      <h1>hel{{ store.user.name }}</h1>
-    </div>
     <!-- login container -->
     <div
       class="bg-transparent flex shadow-lg rounded-2xl max-w-3xl p-5 items-center backdrop-blur"
@@ -60,7 +94,7 @@ const addUser = () => {
           If you are already a member, easily log in
         </p>
 
-        <form @submit.prevent="addUser" class="flex flex-col gap-4">
+        <form @submit.prevent="loginUser" class="flex flex-col gap-4">
           <input
             class="p-2 mt-8 rounded-xl border"
             type="email"
@@ -115,7 +149,9 @@ const addUser = () => {
             Login
           </button>
 
-          <p class="text-xs ml-4 text-red-500" v-if="error">error try again</p>
+          <p class="text-xs ml-4 text-red-500" v-if="error">
+            {{ error.message }}
+          </p>
         </form>
 
         <div class="mt-6 grid grid-cols-3 items-center text-gray-400">

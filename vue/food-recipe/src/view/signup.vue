@@ -2,17 +2,17 @@
 <template>
   <div>
     <section
-      class="bg-gray-50 min-h-screen flex items-center justify-center p-20"
+      class="bg-gray-50 min-h-screen flex items-center banner justify-center p-20"
     >
       <!-- login container -->
       <div
-        class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center"
+        class="bg-white text-center mt-10 flex rounded-2xl max-w-3xl p-5 items-center"
       >
         <!-- form -->
         <div class="">
-          <h2 class="font-bold mt-8 text-2xl text-[#002D74]">Sign up</h2>
+          <h2 class="font-bold mt-8 text-2xl text-red-500">Sign up</h2>
 
-          <form action="" class="flex flex-col gap-4">
+          <form action="" class="flex flex-col gap-4 w-96">
             <input
               class="p-2 mt-8 rounded-xl border"
               type="text"
@@ -56,7 +56,7 @@
             </div>
 
             <button
-              class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"
+              class="bg-red-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
             >
               Sign Up
             </button>
@@ -84,3 +84,11 @@
     </section>
   </div>
 </template>
+<style scoped>
+.banner {
+  background-image: url(../assets/bannerbackground.png);
+  background-attachment: scroll;
+  background-position: center left;
+  background-size: cover;
+}
+</style>
