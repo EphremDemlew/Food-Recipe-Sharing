@@ -7,8 +7,8 @@ import navbar from "./components/navbar.vue";
 
 <template>
   <div>
-    <navbar class="border border-5 border-green-800" />
-    <router-view class="border border-5 border-green-800"></router-view>
+    <navbar />
+    <router-view></router-view>
     <footerPart />
   </div>
 </template>

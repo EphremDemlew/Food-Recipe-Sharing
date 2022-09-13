@@ -7,14 +7,16 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex justify-center items-center lg:mt-20">
+  <div
+    class="flex justify-center items-center w-96 md:mt-10 md:mx-5 sm:mt-10 md:h-1/3 md:w-96 sm:flex sm:justify-center sm:items-center"
+  >
     <div
       class="bg-gray-400 rounded-lg p-6 text-black-100 z-10 shadow-2xl"
       style="cursor: auto"
     >
       <div class="flex flex-wrap items-center">
         <div class="flex w-full md:h-64 lg:h-72 relative">
-          <div class="w-8/12 pr-4 relative">
+          <div class="w-8/12 pr-4 relative md:w-full sm:w-96">
             <img
               :src="img_url"
               class="w-full h-full object-cover object-top rounded-lg bg-white"
@@ -54,7 +56,7 @@ defineProps({
                 <button
                   class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-1 cursor-auto border-green-700 bg-green-500 text-green-900"
                 >
-                  {{ time }} 0 min
+                  <!-- {{ time }}  -->0 min
                 </button>
               </div>
             </div>

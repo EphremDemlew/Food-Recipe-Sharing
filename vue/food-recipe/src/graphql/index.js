@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const recipe_query = gql`
   query recipes {
     recipe {
+      id
       name
       likes
       images {
