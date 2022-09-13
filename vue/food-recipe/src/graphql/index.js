@@ -14,7 +14,7 @@ export const recipe_query = gql`
 `;
 
 export const login_query = gql`
-  query logins($email: String!, $password: String!) {
+  mutation logins($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       id
       token

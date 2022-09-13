@@ -17,7 +17,8 @@ import { createApp, provide, h } from "vue";
 import App from "./App.vue";
 import "./index.css";
 import router from "./router/router";
-import store from "./store/index.js";
+// import store from "./stores/user.js";
+import { createPinia } from "pinia";
 
 const app = createApp({
   setup() {
@@ -27,5 +28,6 @@ const app = createApp({
   render: () => h(App),
 })
   .use(router)
-  .use(store)
+  .use(createPinia())
+  // .use(store)
   .mount("#app");

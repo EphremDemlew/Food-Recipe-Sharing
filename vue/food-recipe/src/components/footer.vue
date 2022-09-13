@@ -1,33 +1,33 @@
 <script setup></script>
 
 <template>
-  <footer class="px-10 bg-white sm:py-6 dark:bg-gray-900 lg:mt-16">
+  <footer class="px-10 bg-slate-900 sm:py-6 dark:bg-gray-900 lg:mt-16">
     <div class="md:flex md:justify-between">
       <div class="mb-6 md:mb-0">
         <router-link to="/" class="flex items-center">
           <img src="../assets/hot-pot.png" class="mr-3 h-8" alt="logo" />
           <span
-            class="self-center text-2xl font-semibold text-red-500 whitespace-nowrap dark:text-white"
+            class="self-center text-2xl font-semibold text-red-500 whitespace-nowrap"
             >Eph</span
           >
         </router-link>
       </div>
       <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
         <div>
-          <h2
-            class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+          <router-link
+            class="mb-6 text-sm font-semibold text-white uppercase"
+            to="/home"
+            >Home</router-link
           >
-            Home
-          </h2>
-          <h2 class="mb-6 text-sm text-gray-600 dark:text-white">Contact</h2>
+          <router-link class="mb-6 text-sm text-white" to="/contact"
+            >Contact</router-link
+          >
         </div>
         <div>
-          <h2
-            class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
-          >
+          <h2 class="mb-6 text-sm font-semibold text-white uppercase">
             Follow me
           </h2>
-          <ul class="text-gray-600 dark:text-gray-400">
+          <ul class="text-white">
             <li class="mb-4">
               <a href="https://github.com/EphremDemlew" class="hover:underline"
                 >Github</a
@@ -42,15 +42,15 @@
     </div>
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
     <div class="sm:flex sm:items-center sm:justify-between">
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+      <span class="text-sm text-white sm:text-center dark:text-gray-400"
         >© 2022
-        <a href="https://flowbite.com/" class="hover:underline">Ephrem</a>. All
+        <router-link to="/" class="hover:underline">Ephrem</router-link>. All
         Rights Reserved.
       </span>
       <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
         <a
-          href="#"
-          class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+          href="https://www.facebook.com/profile.php?id=100009436423865"
+          class="text-gray-500 hover:text-white dark:hover:text-white"
         >
           <svg
             class="w-5 h-5"
@@ -67,8 +67,8 @@
           <span class="sr-only">Facebook page</span>
         </a>
         <a
-          href="#"
-          class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+          href="https://www.instagram.com/ephydemlew/"
+          class="text-gray-500 hover:text-white dark:hover:text-white"
         >
           <svg
             class="w-5 h-5"
@@ -85,8 +85,8 @@
           <span class="sr-only">Instagram page</span>
         </a>
         <a
-          href="#"
-          class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+          href="https://twitter.com/EphremDemelew"
+          class="text-gray-500 hover:text-white dark:hover:text-white"
         >
           <svg
             class="w-5 h-5"
@@ -102,7 +102,7 @@
         </a>
         <a
           href="#"
-          class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+          class="text-gray-500 hover:text-white dark:hover:text-white"
         >
           <svg
             class="w-5 h-5"

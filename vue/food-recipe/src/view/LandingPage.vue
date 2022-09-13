@@ -67,7 +67,7 @@ console.log(error);
     <search />
 
     <div
-      class="flex flex-col justify-center items-center md:flex-row md:color md:justify-evenly"
+      class="flex flex-col justify-center items-center md:flex-row md:justify-evenly"
       v-if="result"
     >
       <div v-for="rec in result.recipe" :key="rec.id">

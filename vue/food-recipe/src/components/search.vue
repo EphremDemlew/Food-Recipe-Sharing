@@ -6,7 +6,7 @@
           <input
             type="text"
             placeholder="enter your search here"
-            class="rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none"
+            class="rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none w-2/3"
           />
           <button
             class="bg-red-500 text-white rounded-full font-semibold px-8 py-4 hover:bg-red-400 focus:bg-red-600 focus:outline-none"

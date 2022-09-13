@@ -8,25 +8,29 @@ defineProps({
 
 <template>
   <div
-    class="flex justify-center items-center w-96 md:mt-10 md:mx-5 sm:mt-10 md:h-1/3 md:w-96 sm:flex sm:justify-center sm:items-center"
+    class="flex justify-center items-center w-72 md:mt-10 md:ml-10 md:px-5 lg:justify-evenly hover:scale-105 transform transition duration-500 cursor-pointer"
   >
     <div
-      class="bg-gray-400 rounded-lg p-6 text-black-100 z-10 shadow-2xl"
+      class="bg-grey-500 rounded-lg p-6 w-fit text-black-100 z-10 shadow-2xl"
       style="cursor: auto"
     >
       <div class="flex flex-wrap items-center">
-        <div class="flex w-full md:h-64 lg:h-72 relative">
-          <div class="w-8/12 pr-4 relative md:w-full sm:w-96">
+        <div class="flex md:h-64 lg:h-72 relative">
+          <div
+            class="w-full p-0 relative sm:w-96 md:pr-4 hover:scale-105 transform transition duration-500 cursor-pointer"
+          >
             <img
               :src="img_url"
               class="w-full h-full object-cover object-top rounded-lg bg-white"
             />
           </div>
 
-          <div class="w-4/12 h-full">
+          <div class="w-4/12 h-full hidden md:block">
             <div class="flex flex-col w-full h-full">
               <div class="flex-1 pb-2">
-                <div class="w-full h-full relative">
+                <div
+                  class="w-full h-full relative hover:scale-105 transform transition duration-500 cursor-pointer"
+                >
                   <img
                     :src="img_url"
                     class="absolute top-0 w-full h-full object-cover object-center rounded-lg bg-white"
@@ -34,8 +38,10 @@ defineProps({
                 </div>
               </div>
 
-              <div class="flex-1 pt-2">
-                <div class="w-full h-full relative">
+              <div class="flex-1 pt-2 hidden md:block">
+                <div
+                  class="w-full h-full relative hover:scale-105 transform transition duration-500 cursor-pointer"
+                >
                   <img
                     :src="img_url"
                     class="absolute top-0 w-full h-full object-cover object-bottom rounded-lg bg-white"
@@ -54,7 +60,7 @@ defineProps({
               </div>
               <div>
                 <button
-                  class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-1 cursor-auto border-green-700 bg-green-500 text-green-900"
+                  class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-1 cursor-auto glow border-green-700 bg-green-500 text-green-900"
                 >
                   <!-- {{ time }}  -->0 min
                 </button>

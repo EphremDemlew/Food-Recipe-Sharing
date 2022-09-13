@@ -5,7 +5,7 @@ actions:
       handler: http://localhost:3000/addUser
   - name: login
     definition:
-      kind: ""
+      kind: synchronous
       handler: http://localhost:5000/login
     permissions:
       - role: anonymous
