@@ -6,9 +6,9 @@ import navbar from "./components/navbar.vue";
 </script>
 
 <template>
-  <div class="w-screen">
-    <navbar />
-    <router-view></router-view>
+  <div>
+    <navbar class="border border-5 border-green-800" />
+    <router-view class="border border-5 border-green-800"></router-view>
     <footerPart />
   </div>
 </template>

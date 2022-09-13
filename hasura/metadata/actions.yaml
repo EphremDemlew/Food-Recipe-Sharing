@@ -1,4 +1,8 @@
 actions:
+  - name: addUser
+    definition:
+      kind: synchronous
+      handler: http://localhost:3000/addUser
   - name: login
     definition:
       kind: ""
@@ -19,4 +23,5 @@ custom_types:
   objects:
     - name: LoginOutput
     - name: SignUpOutput
+    - name: AddUserOutput
   scalars: []
