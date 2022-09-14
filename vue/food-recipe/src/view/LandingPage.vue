@@ -4,6 +4,7 @@ import { useQuery } from "@vue/apollo-composable";
 import cards from "../components/cards.vue";
 import Search from "../components/search.vue";
 import { recipe_query } from "../graphql/index";
+import loadingVue from "../components/loading.vue";
 // import { computed } from "vue";
 // import { useStore } from "vuex";
 // const store = useStore();
@@ -79,15 +80,8 @@ console.log(error);
         />
       </div>
     </div>
-    <div v-if="loading">
-      <div class="flex justify-center items-center">
-        <div
-          class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
-          role="status"
-        >
-          <span class="visually-hidden"></span>
-        </div>
-      </div>
+    <div v-if="loading" class="flex justify-center items-center">
+      <loadingVue></loadingVue>
     </div>
   </div>
 </template>

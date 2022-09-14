@@ -1,16 +1,9 @@
-import { useField } from "vee-validate";
+// import { string, object } from "yup";
+import * as yup from "yup";
 
-const vee = () => {
-  function validateField(value) {
-    if (!value) {
-      return "this field is required";
-    }
-
-    if (value.length < 8) {
-      return "this field must contain at least 8 characters";
-    }
-
-    return true;
-  }
-  const { value, errorMessage } = useField("fullName", validateField);
-};
+export const signupSchema = yup.object({
+  first_name: yup.string().min(6).required(),
+  last_name: yup.string().min(6).required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+});

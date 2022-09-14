@@ -11,7 +11,7 @@
     </div>
     <!-- login container -->
     <div
-      class="bg-transparent text-center shadow-2xl flex rounded-2xl max-w-3xl p-5 items-center backdrop-blur"
+      class="bg-transparent text-left shadow-2xl flex rounded-2xl max-w-3xl p-5 items-center backdrop-blur"
     >
       <!-- form -->
       <div class="md:w-1/2 px-8 md:px-16">
@@ -20,22 +20,27 @@
           If you are already a member, easily log in
         </p>
 
-        <form @submit.prevent="loginUser" class="flex flex-col gap-4">
-          <input
+        <Form
+          :validation-schema="signupSchema"
+          @submit="loginUser"
+          class="flex flex-col gap-4"
+        >
+          <Field
             class="p-2 mt-8 rounded-xl border"
             type="email"
             name="email"
-            v-model="email"
             placeholder="Email"
           />
+          <ErrorMessage name="email" class="py-2 text-xs text-red-500" />
+
           <div class="relative">
-            <input
+            <Field
               class="p-2 rounded-xl border w-full"
               type="password"
-              v-model="password"
               name="password"
               placeholder="Password"
             />
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -52,6 +57,10 @@
               />
             </svg>
           </div>
+          <ErrorMessage
+            name="password"
+            class="py-2 text-xs ml-4 text-red-500"
+          />
           <button
             class="bg-red-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
           >
@@ -78,7 +87,7 @@
           <p class="text-xs ml-4 text-red-500" v-if="error">
             {{ error.message }}
           </p>
-        </form>
+        </Form>
 
         <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
           <hr class="border-gray-400" />
@@ -116,14 +125,20 @@ import { useRouter } from "vue-router";
 import { login_query } from "../graphql";
 import { userLoginStore } from "../stores/user";
 import { computed } from "@vue/runtime-core";
+import { ErrorMessage, Form, Field } from "vee-validate";
+import * as yup from "yup";
+
+const signupSchema = yup.object({
+  email: yup.string().email().required().label("Email Address"),
+  password: yup.string().min(6).required().label("Your Password"),
+});
+
 const user = userLoginStore();
 const router = useRouter();
 
 // store.user.name;
 // provide(ApolloClients, apolloClients);
-
-const email = ref("");
-const password = ref("");
+let users = ref({});
 const check = ref(false);
 
 // const store = useStore();
@@ -134,12 +149,16 @@ const {
   onDone,
 } = useMutation(login_query, () => ({
   variables: {
-    email: email.value,
-    password: password.value,
+    email: users.email,
+    password: users.password,
   },
 }));
 
-const loginUser = async () => {
+const loginUser = async (value) => {
+  users = {
+    email: value.email,
+    password: value.password,
+  };
   login();
   onDone((res) => {
     if (res.data) {
@@ -149,11 +168,9 @@ const loginUser = async () => {
       const email = res.data.login.email;
       const createdDate = res.data.login.created_at;
       user.login(token, Id, createdDate, name, email);
-      toste();
+      // toste();
       router.push("/home");
 
-      email.value = "";
-      password.value = "";
       return;
     }
   });

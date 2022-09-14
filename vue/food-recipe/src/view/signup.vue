@@ -11,36 +11,66 @@
         <div class="">
           <h2 class="font-bold mt-8 text-2xl text-[#002D74]">Sign up</h2>
 
-          <form @submit.prevent="addUser" class="flex flex-col gap-4 w-96">
-            <input
+          <Form
+            @submit="addUser"
+            :validation-schema="signupSchema"
+            class="flex flex-col gap-4 w-96"
+          >
+            <Field
               class="p-2 mt-8 rounded-xl border"
               type="text"
               name="first_name"
               placeholder="First Name"
-              v-model="firstName"
             />
-            <input
+            <ErrorMessage name="first_name" />
+            <Field
               class="p-2 rounded-xl border"
               type="text"
               name="last_name"
               placeholder="Last Name"
-              v-model="lastName"
             />
-            <input
+            <ErrorMessage name="last_name" />
+
+            <Field
               class="p-2 rounded-xl border"
               type="email"
               name="email"
               placeholder="Email"
-              v-model="email"
             />
+            <ErrorMessage name="email" />
             <div class="relative">
-              <input
+              <Field
                 class="p-2 rounded-xl border w-full"
                 type="password"
                 name="password"
                 placeholder="Password"
-                v-model="password"
               />
+              <ErrorMessage name="password" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="gray"
+                class="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                />
+                <path
+                  d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+                />
+              </svg>
+            </div>
+
+            <div class="relative">
+              <Field
+                class="p-2 rounded-xl border w-full"
+                type="password"
+                name="passwordConfirm"
+                placeholder="Confirm Password"
+              />
+              <ErrorMessage name="passwordConfirm" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -83,7 +113,7 @@
             <p class="text-xs ml-4 text-red-500" v-if="error">
               {{ error.message }}
             </p>
-          </form>
+          </Form>
 
           <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
             <hr class="border-gray-400" />
@@ -112,34 +142,42 @@ import { ref } from "@vue/reactivity";
 import { signup_query } from "../graphql/index";
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import { useRouter } from "vue-router";
-
+import { ErrorMessage, Form, Field } from "vee-validate";
 import { userLoginStore } from "../stores/user";
+// import signupSchema from "../validator/index";
+// import { string, object } from "yup";
+import * as yup from "yup";
+
+const signupSchema = yup.object({
+  first_name: yup.string().min(6).required().label("First Name"),
+  last_name: yup.string().min(6).required().label("Last Name"),
+  email: yup.string().email().required().label("Email Address"),
+  password: yup.string().min(6).required().label("Your Password"),
+  passwordConfirm: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("You must Confirm your password")
+    .label("Password confirmation"),
+});
+
 const user = userLoginStore();
 const router = useRouter();
+let users = ref({});
+const addUser = async (value) => {
+  users = {
+    first_name: value.first_name,
+    last_name: value.last_name,
+    email: value.email,
+    password: value.password,
+  };
 
-const firstName = ref("");
-const lastName = ref("");
-const email = ref("");
-const password = ref("");
-
-const {
-  mutate: signup,
-  loading: loading,
-  error: error,
-  onDone,
-} = useMutation(signup_query, () => ({
-  variables: {
-    first_name: firstName.value,
-    last_name: lastName.value,
-    email: email.value,
-    password: password.value,
-  },
-}));
-
-const addUser = async () => {
   signup();
   onDone((res) => {
+    console.log("The data is  .............//");
+
     if (res.data) {
+      console.log("The data is  .............");
+      console.log(res.data);
       const token = res.data.sign_up.token;
       const Id = res.data.sign_up.id;
       const name = res.data.sign_up.first_name;
@@ -148,12 +186,24 @@ const addUser = async () => {
       user.login(token, Id, createdDate, name, email);
       router.push("/home");
 
-      email.value = "";
-      password.value = "";
       return;
     }
   });
 };
+
+const {
+  mutate: signup,
+  loading: loading,
+  error: error,
+  onDone,
+} = useMutation(signup_query, () => ({
+  variables: {
+    first_name: users.first_name,
+    last_name: users.last_name,
+    email: users.email,
+    password: users.password,
+  },
+}));
 </script>
 
 <style scoped>
