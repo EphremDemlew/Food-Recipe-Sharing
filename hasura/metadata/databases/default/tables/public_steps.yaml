@@ -1,5 +1,5 @@
 table:
-  name: Ingredients
+  name: steps
   schema: public
 object_relationships:
   - name: recipe
@@ -13,27 +13,22 @@ insert_permissions:
           user:
             id:
               _eq: X-Hasura-User-Id
-      set:
-        recipe_id: x-hasura-User-Id
       columns:
-        - ingridents
+        - steps
+        - id
         - recipe_id
 select_permissions:
   - role: anonymous
     permission:
       columns:
-        - ingridents
-        - created_at
-        - updated_at
+        - steps
         - id
         - recipe_id
       filter: {}
   - role: user
     permission:
       columns:
-        - ingridents
-        - created_at
-        - updated_at
+        - steps
         - id
         - recipe_id
       filter: {}
@@ -41,7 +36,9 @@ update_permissions:
   - role: user
     permission:
       columns:
-        - ingridents
+        - steps
+        - id
+        - recipe_id
       filter:
         recipe:
           user:

@@ -13,19 +13,19 @@ array_relationships:
         table:
           name: Ingredients
           schema: public
+  - name: categories
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: category
+          schema: public
   - name: comments
     using:
       foreign_key_constraint_on:
         column: recipe_id
         table:
           name: comment
-          schema: public
-  - name: commentsByRecipeId
-    using:
-      foreign_key_constraint_on:
-        column: recipe_id
-        table:
-          name: comments
           schema: public
   - name: favorites
     using:
@@ -41,6 +41,13 @@ array_relationships:
         table:
           name: images
           schema: public
+  - name: likes
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: likes
+          schema: public
   - name: ratings
     using:
       foreign_key_constraint_on:
@@ -48,36 +55,48 @@ array_relationships:
         table:
           name: rating
           schema: public
+  - name: steps
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          name: steps
+          schema: public
 insert_permissions:
   - role: user
     permission:
       check:
         user_id:
           _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-user-id
       columns:
+        - desc
         - id
-        - likes
-        - name
         - time
+        - title
         - user_id
 select_permissions:
   - role: anonymous
     permission:
       columns:
-        - created_at
-        - id
-        - likes
-        - name
         - time
+        - desc
+        - title
+        - created_at
         - updated_at
+        - id
         - user_id
-      filter: {}
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
   - role: user
     permission:
       columns:
-        - likes
         - time
-        - name
+        - desc
+        - title
         - created_at
         - updated_at
         - id
@@ -89,10 +108,10 @@ update_permissions:
   - role: user
     permission:
       columns:
+        - desc
         - id
-        - likes
-        - name
         - time
+        - title
         - user_id
       filter:
         user_id:
@@ -100,6 +119,8 @@ update_permissions:
       check:
         user_id:
           _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-user-id
 delete_permissions:
   - role: user
     permission:

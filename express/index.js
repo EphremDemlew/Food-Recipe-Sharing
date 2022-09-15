@@ -7,7 +7,51 @@ const signup_query = require("./queries/signup_query");
 const login_query = require("./queries/login_query");
 const uploade_query = require("./queries/fileUploade_query");
 const multer = require("multer");
-const upload = multer({ dest: "images/" });
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/images");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
+function fileFilter(req, file, cb) {
+  // The function should call `cb` with a boolean
+  // to indicate if the file should be accepted
+
+  // To reject this file pass `false`, like so:
+  cb(null, false);
+
+  // To accept the file pass `true`, like so:
+  cb(null, true);
+
+  // You can always pass an error if something goes wrong:
+  cb(new Error("I don't have a clue!"));
+}
+
+const upload = multer({
+  storage: storage,
+  fileFilter: function fileFilter(req, file, cb) {
+    // Allowed ext
+    const filetypes = /jpeg|jpg|png|gif/;
+
+    // Check ext
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    // Check mime
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb("Error: Images Only!");
+    }
+  },
+});
 
 require("dotenv").config();
 
@@ -166,28 +210,16 @@ app.post("/Login", async (req, res) => {
 });
 
 // uploade Request Handler
-app.post("/uploadeImage", upload.array("photos", 12), async (req, res) => {
-  // req.file;
-  // get request input
-  const { image_url } = req.body.input;
-  console.log("herrrrrrrrrrrrray");
-  console.log(req.body);
+app.post("/uploadeImage", upload.single("file"), (req, res) => {
+  const { title, description, ingridents, steps, category, time } = req.body;
+  console.log(title, description, ingridents, steps, category, time);
+
+  console.log(ingridents);
+  console.log(req.file.path);
   console.log(req.file);
-  // execute the Hasura operation
-  const { data, errors } = await uploade_execute({ image_url });
-
-  // if Hasura operation errors, then throw error
-  if (errors) {
-    return res.status(400).json(errors[0]);
-  }
-
-  // success
-  return res.json({
-    ...data.insert_images_one,
-  });
+  res.json({ file: req.file });
 });
 
-// Request Handler
 // app.post("/addRecipe", fileUploade);
 
 const port = process.env.PORT || 5050;

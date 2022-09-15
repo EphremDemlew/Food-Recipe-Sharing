@@ -19,6 +19,7 @@ insert_permissions:
         user_id: x-hasura-User-Id
       columns:
         - recipe_id
+        - user_id
 select_permissions:
   - role: user
     permission:
