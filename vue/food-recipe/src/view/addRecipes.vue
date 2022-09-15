@@ -3,16 +3,16 @@
     <section
       class="bg-gray-50 min-h-screen flex flex-col items-center banner justify-center p-20"
     >
-      <div class="mt-3 relative left-0 w-full">
-        <button
-          class="bg-red-500 text-white pl-5 pr-10 py-1 rounded-md"
-          @click="router.push('/home')"
+      <div class="mt-5 relative left-0 w-full">
+        <router-link
+          to="/home"
+          class="bg-red-500 text-white pl-5 pr-10 py-2 rounded-md"
         >
           <i
             class="fa-solid fa-caret-left hover:-translate-x-2 duration-500 pr-16"
           ></i>
           <span class="-ml-12">Back</span>
-        </button>
+        </router-link>
       </div>
       <!-- aler -->
       <div class="fixed bottom-5 right-5">
@@ -93,19 +93,29 @@
             />
             <input
               class="p-2 rounded-xl border"
-              type="text"
-              name="category"
-              v-model="recs.category"
-              placeholder="Category"
-            />
-
-            <input
-              class="p-2 rounded-xl border"
               type="number"
               name="time"
               v-model="recs.time"
               placeholder="Time required in minutes"
             />
+            <div v-for="i in recs.catRows" :key="i">
+              <input
+                class="p-2 rounded-xl w-96 border"
+                type="text"
+                name="cat"
+                placeholder="Categories"
+                v-model="recs.cats[i - 1]"
+              />
+            </div>
+            <div class="">
+              <button
+                @click="addCatsRows"
+                type="button"
+                class="py-2 px-5 rounded-md bg-red-500 hover:bg-red-600 text-white"
+              >
+                Add Categories
+              </button>
+            </div>
             <div v-for="i in recs.stepRows" :key="i">
               <input
                 class="p-2 rounded-xl w-96 border"
@@ -222,173 +232,6 @@
               {{ message }}
             </p>
           </form>
-          <!-- <Form
-            @submit="addRecipe"
-            :validation-schema="addRecipeSchema"
-            class="flex flex-col gap-4 w-96 text-left"
-          >
-            <Field
-              class="p-2 mt-8 rounded-xl border"
-              type="text"
-              name="title"
-              placeholder="Title"
-            />
-            <ErrorMessage name="title" class="py-2 text-xs ml-4 text-red-500" />
-            <Field
-              as="textarea"
-              class="p-2 rounded-xl border"
-              name="description"
-              placeholder="Description"
-            />
-            <ErrorMessage
-              name="description"
-              class="py-2 text-xs ml-4 text-red-500"
-            />
-
-            <Field
-              class="p-2 rounded-xl border"
-              type="text"
-              name="category"
-              placeholder="Category"
-            />
-            <ErrorMessage
-              name="category"
-              class="py-2 text-xs ml-4 text-red-500"
-            />
-
-            <Field
-              class="p-2 rounded-xl border"
-              type="number"
-              name="time"
-              placeholder="Time required in minutes"
-            />
-            <ErrorMessage name="time" class="py-2 text-xs ml-4 text-red-500" />
-            <div v-for="i in rec.value.value" :key="i">
-              <Field
-                class="p-2 rounded-xl w-96 border"
-                type="text"
-                name="Ingridents"
-                placeholder="Ingridents"
-                v-model="rec.value.value.ingridents[i - 1]"
-              />
-              <ErrorMessage
-                name="Ingridents"
-                class="py-2 text-xs ml-4 text-red-500"
-              />
-            </div>
-            <div class="">
-              <button
-                @click="addIngridentRows"
-                type="button"
-                class="py-2 px-5 rounded-md bg-red-500 hover:bg-red-600 text-white"
-              >
-                Add Ingridents
-              </button>
-            </div>
-            <div>
-              <Field
-                as="textarea"
-                class="p-2 rounded-xl border w-96"
-                name="steps"
-                placeholder="Add Steps"
-                v-model="val"
-              />
-              <ErrorMessage
-                name="steps"
-                class="py-2 text-xs ml-4 text-red-500"
-              />
-            </div>
-            <div class="">
-              <button
-                @click="addStepRows"
-                type="button"
-                class="py-2 px-5 rounded-md bg-red-500 hover:bg-red-600 text-white"
-              >
-                Add Steps
-              </button>
-            </div>
-
-            <div class="flex justify-center items-center w-full">
-              <label
-                for="dropzone-file"
-                class="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-red-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-              >
-                <div
-                  class="flex flex-col justify-center items-center pt-5 pb-6"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="mb-3 w-10 h-10 text-green-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                    ></path>
-                  </svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span class="font-semibold">Click to upload Images</span> or
-                    drag and drop
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG
-                  </p>
-                </div>
-                <input id="dropzone-file" type="file" class="hidden" />
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              class="bg-red-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
-            >
-              <svg
-                v-if="loading"
-                role="status"
-                class="inline mr-3 w-4 h-4 text-white animate-spin"
-                viewBox="0 0 100 101"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                  fill="#E5E7EB"
-                />
-                <path
-                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                  fill="currentColor"
-                />
-              </svg>
-
-              Add Recipe
-            </button>
-            <p class="text-xs ml-4 text-red-500" v-if="error">
-              {{ error.message }}
-            </p>
-          </Form> -->
-
-          <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
-            <hr class="border-gray-400" />
-            <p class="text-center text-sm">OR</p>
-            <hr class="border-gray-400" />
-          </div>
-
-          <div
-            class="mt-3 text-xs flex justify-between items-center text-[#002D74]"
-          >
-            <p>Do you have an account?</p>
-            <router-link
-              to="/login"
-              class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300"
-            >
-              Login
-            </router-link>
-          </div>
         </div>
       </div>
     </section>
@@ -418,10 +261,11 @@ const recs = ref({
   description: "",
   ingridents: [],
   steps: [],
-  category: "",
+  cats: [],
   time: 0,
   ingridentRows: 1,
   stepRows: 1,
+  catRows: 1,
 });
 
 const addRecipe = () => {
@@ -437,7 +281,7 @@ const addRecipe = () => {
   fd.append("description", recs.value.description);
   fd.append("ingridents", recs.value.ingridents);
   fd.append("steps", recs.value.steps);
-  fd.append("category", recs.value.category);
+  fd.append("category", recs.value.cats);
   fd.append("time", recs.value.time);
 
   name.value = "";
@@ -456,6 +300,16 @@ const addRecipe = () => {
       console.log(err.data);
     });
 
+  recs.value.title = "";
+  recs.value.description = "";
+  recs.value.ingridents = [];
+  recs.value.steps = [];
+  recs.value.cats = [];
+  recs.value.ingridentRows = 1;
+  recs.value.stepRows = 1;
+  recs.value.catRows = 1;
+  recs.value.time = 0;
+
   // const fd = new FormData();
 
   // fd.append();
@@ -463,6 +317,9 @@ const addRecipe = () => {
 
 const addIngridentRows = () => {
   recs.value.ingridentRows++;
+};
+const addCatsRows = () => {
+  recs.value.catRows++;
 };
 const addStepRows = () => {
   recs.value.stepRows++;
