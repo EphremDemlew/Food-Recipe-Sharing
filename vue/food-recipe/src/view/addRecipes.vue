@@ -55,6 +55,56 @@
               class="py-2 text-xs ml-4 text-red-500"
             />
 
+            <Field
+              class="p-2 rounded-xl border"
+              type="number"
+              name="time"
+              placeholder="Time required in minutes"
+            />
+            <ErrorMessage name="time" class="py-2 text-xs ml-4 text-red-500" />
+            <div v-for="no in newRecipe.ingridentRows" :key="no.ingridentRows">
+              <Field
+                class="p-2 rounded-xl w-96 border"
+                type="text"
+                name="Ingridents"
+                placeholder="Ingridents"
+              />
+              <ErrorMessage
+                name="Ingridents"
+                class="py-2 text-xs ml-4 text-red-500"
+              />
+            </div>
+            <div class="">
+              <button
+                @click="addIngridentRows"
+                type="button"
+                class="py-1 px-5 rounded-md bg-red-500 hover:bg-red-600 text-white"
+              >
+                Add Ingridents
+              </button>
+            </div>
+            <div v-for="no in newRecipe.stepRows" :key="no.stepRows">
+              <Field
+                as="textarea"
+                class="p-2 rounded-xl border w-96"
+                name="steps"
+                placeholder="Add Steps"
+              />
+              <ErrorMessage
+                name="steps"
+                class="py-2 text-xs ml-4 text-red-500"
+              />
+            </div>
+            <div class="">
+              <button
+                @click="addStepRows"
+                type="button"
+                class="py-1 px-5 rounded-md bg-red-500 hover:bg-red-600 text-white"
+              >
+                Add Steps
+              </button>
+            </div>
+
             <div class="flex justify-center items-center w-full">
               <label
                 for="dropzone-file"
@@ -89,6 +139,7 @@
                 <input id="dropzone-file" type="file" class="hidden" />
               </label>
             </div>
+
             <button
               class="bg-red-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
             >
@@ -151,16 +202,37 @@ import * as yup from "yup";
 const router = useRouter();
 
 const addRecipeSchema = yup.object({
-  first_name: yup.string().min(6).required().label("First Name"),
-  last_name: yup.string().min(6).required().label("Last Name"),
-  email: yup.string().email().required().label("Email Address"),
-  password: yup.string().min(6).required().label("Your Password"),
-  passwordConfirm: yup
-    .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
-    .required("You must Confirm your password")
-    .label("Password confirmation"),
+  title: yup.string().min(3).required().label("Title "),
+  description: yup.string().required().label("Description "),
+  category: yup.string().required().label("Category "),
+  time: yup.number().required().label("Time "),
+  steps: yup.string().min(6).required().label("Steps For the recipes "),
+  Ingridents: yup.string().required().label("Ingridents For this recipe "),
 });
+
+const newRecipe = ref({
+  title: "",
+  description: "",
+  ingridents: [],
+  steps: [],
+  ingridentRows: 1,
+  stepRows: 1,
+});
+
+// const addRecipe = async (value) => {
+//   users = {
+//     first_name: value.first_name,
+//     last_name: value.last_name,
+//     email: value.email,
+//     password: value.password,
+//   };
+
+const addIngridentRows = () => {
+  newRecipe.value.ingridentRows++;
+};
+const addStepRows = () => {
+  newRecipe.value.stepRows++;
+};
 </script>
 
 <style scoped>
