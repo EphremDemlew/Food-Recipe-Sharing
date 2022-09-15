@@ -1,5 +1,54 @@
 import gql from "graphql-tag";
 
+export const full_recipe_query = gql`
+  query recipes {
+    recipe {
+      id
+      title
+      desc
+      time
+      user_id
+      images {
+        image_url
+      }
+      steps {
+        steps
+      }
+      Ingredients {
+        ingridents
+      }
+      categories {
+        category
+      }
+      comments {
+        comment
+      }
+      likes {
+        like
+      }
+      likes_aggregate {
+        aggregate {
+          count(columns: like)
+        }
+      }
+      comments_aggregate {
+        aggregate {
+          count(columns: comment)
+        }
+      }
+      ratings {
+        rating
+      }
+      ratings_aggregate {
+        aggregate {
+          avg {
+            rating
+          }
+        }
+      }
+    }
+  }
+`;
 export const recipe_query = gql`
   query recipes {
     recipe {

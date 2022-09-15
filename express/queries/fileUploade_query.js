@@ -164,17 +164,21 @@ module.exports = Ingredients_Hasura_operation;
 ////////////////////////////////// Category ///////////////////////////////////////////////////
 
 const category_Hasura_operation = `
-mutation($comment:String! ,$user_id:uuid!, $recipe_id:uuid! ,  ) {
-  insert_comment(objects: {comment: $comment, user_id: $user_id, recipe_id: $recipe_id}) {
+mutation ($category: [category_insert_input!]!) {
+  insert_category(objects: $category) {
     affected_rows
   }
 }
+
 `;
 module.exports = comment_Hasura_operation;
 
 // the variable is like
 // {
-//   "comment": "What a good recipe",
-// 	"user_id": "dd822415-a2d6-49c5-9c98-0571faeb6f88",
-//   "recipe_id": "a2590db0-eae0-4fbc-a454-9b862f031a61"
+//   "category": [
+//     {
+//       "recipe_id": "a2590db0-eae0-4fbc-a454-9b862f031a61",
+//        "category": "Main Course"
+//     }
+//   ]
 // }
