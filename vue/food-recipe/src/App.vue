@@ -1,11 +1,11 @@
 <script setup>
 import footerPart from "./components/footer.vue";
 import navbar from "./components/navbar.vue";
-import { userproductStore } from "./stores/productStore";
+import { useProductStore } from "./stores/productStore";
 import { recipe_query } from "./graphql/index";
 import { useQuery } from "@vue/apollo-composable";
 
-const recipes = userproductStore();
+const recipes = useProductStore();
 
 const { result, loading, error, onResult } = useQuery(recipe_query);
 onResult((val) => {

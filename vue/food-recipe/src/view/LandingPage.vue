@@ -4,13 +4,13 @@ import cards from "../components/cards.vue";
 import Search from "../components/search.vue";
 import { recipe_query } from "../graphql/index";
 import loadingVue from "../components/loading.vue";
-import { userproductStore } from "../stores/productStore";
+import { useProductStore } from "../stores/productStore";
 import { useRouter } from "vue-router";
 import { ref } from "@vue/reactivity";
 import { computed, onMounted } from "vue";
 
 const router = useRouter();
-const recipes = userproductStore();
+const recipes = useProductStore();
 let loading = ref(false);
 const val = computed(() => {
   let recipesVals = ref(null);

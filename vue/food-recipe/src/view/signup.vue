@@ -14,7 +14,7 @@
           <Form
             @submit="addUser"
             :validation-schema="signupSchema"
-            class="flex flex-col gap-4 w-96"
+            class="flex flex-col gap-4 w-96 text-left"
           >
             <Field
               class="p-2 mt-8 rounded-xl border"
@@ -22,14 +22,20 @@
               name="first_name"
               placeholder="First Name"
             />
-            <ErrorMessage name="first_name" />
+            <ErrorMessage
+              name="first_name"
+              class="py-2 text-xs ml-4 text-red-500"
+            />
             <Field
               class="p-2 rounded-xl border"
               type="text"
               name="last_name"
               placeholder="Last Name"
             />
-            <ErrorMessage name="last_name" />
+            <ErrorMessage
+              name="last_name"
+              class="py-2 text-xs ml-4 text-red-500"
+            />
 
             <Field
               class="p-2 rounded-xl border"
@@ -37,7 +43,7 @@
               name="email"
               placeholder="Email"
             />
-            <ErrorMessage name="email" />
+            <ErrorMessage name="email" class="py-2 text-xs ml-4 text-red-500" />
             <div class="relative">
               <Field
                 class="p-2 rounded-xl border w-full"
@@ -45,7 +51,10 @@
                 name="password"
                 placeholder="Password"
               />
-              <ErrorMessage name="password" />
+              <ErrorMessage
+                name="password"
+                class="py-2 text-xs ml-4 text-red-500"
+              />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -70,7 +79,10 @@
                 name="passwordConfirm"
                 placeholder="Confirm Password"
               />
-              <ErrorMessage name="passwordConfirm" />
+              <ErrorMessage
+                name="passwordConfirm"
+                class="py-2 text-xs ml-4 text-red-500"
+              />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -143,7 +155,7 @@ import { signup_query } from "../graphql/index";
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import { useRouter } from "vue-router";
 import { ErrorMessage, Form, Field } from "vee-validate";
-import { userLoginStore } from "../stores/user";
+import { userStore } from "../stores/userStore";
 // import signupSchema from "../validator/index";
 // import { string, object } from "yup";
 import * as yup from "yup";
@@ -160,7 +172,7 @@ const signupSchema = yup.object({
     .label("Password confirmation"),
 });
 
-const user = userLoginStore();
+const user = userStore();
 const router = useRouter();
 let users = ref({});
 const addUser = async (value) => {

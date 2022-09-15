@@ -54,8 +54,8 @@
 </template>
 
 <script setup>
-import { userLoginStore } from "../stores/user";
-const user = userLoginStore();
+import { userStore } from "../stores/userStore";
+const user = userStore();
 </script>
 <style scoped>
 body {

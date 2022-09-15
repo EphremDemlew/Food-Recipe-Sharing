@@ -123,7 +123,7 @@ import { ref } from "@vue/reactivity";
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import { useRouter } from "vue-router";
 import { login_query } from "../graphql";
-import { userLoginStore } from "../stores/user";
+import { userStore } from "../stores/userStore";
 import { computed } from "@vue/runtime-core";
 import { ErrorMessage, Form, Field } from "vee-validate";
 import * as yup from "yup";
@@ -133,7 +133,7 @@ const signupSchema = yup.object({
   password: yup.string().min(6).required().label("Your Password"),
 });
 
-const user = userLoginStore();
+const user = userStore();
 const router = useRouter();
 
 // store.user.name;

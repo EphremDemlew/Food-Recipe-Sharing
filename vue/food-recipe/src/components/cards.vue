@@ -54,7 +54,7 @@
                 <button
                   class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-1 cursor-auto glow border-green-700 bg-green-500 text-green-900"
                 >
-                  <!-- {{ time }}  -->0 min{{ id }}
+                  <!-- {{ time }}  -->0 min
                 </button>
               </div>
             </div>

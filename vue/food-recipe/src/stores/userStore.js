@@ -3,7 +3,7 @@ import { useRouter } from "vue-router";
 import { useStorage } from "@vueuse/core";
 
 const router = useRouter();
-export const userLoginStore = defineStore("user", {
+export const userStore = defineStore("userStore", {
   state: () => ({
     Id: useStorage("id", ""),
     createdDate: useStorage("createdDate", ""),
