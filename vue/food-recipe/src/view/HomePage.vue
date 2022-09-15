@@ -3,12 +3,14 @@ import footerVue from "../components/footer.vue";
 import navBar from "../components/navbar.vue";
 import cards from "../components/cards.vue";
 import status from "../components/status.vue";
-import { useQuery } from "@vue/apollo-composable";
-import { recipe_query } from "../graphql/index";
 import Search from "../components/search.vue";
 import Loading from "../components/loading.vue";
-
-const { result, loading, error } = useQuery(recipe_query);
+import { userproductStore } from "../stores/productStore";
+const recipes = userproductStore();
+const recipesVals = recipes.recipes[0].data;
+console.log(recipes.recipes[0].data);
+console.log("recipesVals");
+console.log(recipesVals);
 </script>
 <template>
   <div>
@@ -18,14 +20,15 @@ const { result, loading, error } = useQuery(recipe_query);
     <div class="">
       <div
         class="flex flex-col justify-center items-center lg:flex-row md:color lg:justify-evenly"
-        v-if="result"
+        v-if="recipesVals"
       >
-        <div v-for="rec in result.recipe" :key="rec.id">
+        <div v-for="rec in recipesVals.recipe" :key="rec.id">
           <cards
             class="flex w-96 justify-center items-center mb-10"
             :title="rec.name"
+            :id="rec.id"
             :img_url="rec.images[0].image_url"
-            :like="result.likes"
+            :like="rec.likes"
           />
         </div>
       </div>

@@ -44,3 +44,12 @@ export const signup_query = gql`
     }
   }
 `;
+
+export const imgUploade = gql`
+  mutation ($image_url: String!) {
+    uploadeImage(image_url: $image_url) {
+      id
+      image_url
+    }
+  }
+`;

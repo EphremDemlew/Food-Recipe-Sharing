@@ -1,32 +1,29 @@
 <script setup>
 import { useQuery } from "@vue/apollo-composable";
-
 import cards from "../components/cards.vue";
 import Search from "../components/search.vue";
 import { recipe_query } from "../graphql/index";
 import loadingVue from "../components/loading.vue";
-// import { computed } from "vue";
-// import { useStore } from "vuex";
-// const store = useStore();
-// const val = computed(() => {
-//   return store.getters?.recipe;
-// });
+import { userproductStore } from "../stores/productStore";
+import { useRouter } from "vue-router";
+import { ref } from "@vue/reactivity";
+import { computed, onMounted } from "vue";
 
-const { result, loading, error } = useQuery(recipe_query);
-console.log("From on outside");
-console.log(result);
-console.log(loading);
-console.log(error);
+const router = useRouter();
+const recipes = userproductStore();
+let loading = ref(false);
+const val = computed(() => {
+  let recipesVals = ref(null);
+  recipesVals = recipes.recipes[0].data;
+  return recipesVals;
+});
+console.log(val);
 
-// console.log(result);
-
-// onResult((result) => {
-//   console.log("result=", result.data);
-//   store?.commit("setRecipe", result.data);
-// });
+// toste();
+// router.push("/home");
 </script>
 <template>
-  <div class="md:mt-8 w-full">
+  <div class="md:mt-8 w-full" v-if="val != null">
     <div
       class="hero min-h-screen w-full bg-base-200 flex items-center justify-center -mt-10"
     >
@@ -66,23 +63,23 @@ console.log(error);
       </div>
     </div>
     <search />
-
     <div
       class="flex flex-col justify-center items-center md:flex-row md:justify-evenly"
-      v-if="result"
     >
-      <div v-for="rec in result.recipe" :key="rec.id">
+      <div v-for="rec in val.recipe" :key="rec.id">
         <cards
-          class="flex w-96 justify-center mb-10 md:w-full"
+          class="flex w-96 justify-center items-center mb-10"
           :title="rec.name"
+          :id="rec.id"
           :img_url="rec.images[0].image_url"
-          :like="result.likes"
+          :like="rec.likes"
         />
       </div>
     </div>
-    <div v-if="loading" class="flex justify-center items-center">
-      <loadingVue></loadingVue>
-    </div>
+
+    <!-- <div v-if="loading == true" class="flex justify-center items-center">
+        <loadingVue></loadingVue>
+      </div> -->
   </div>
 </template>
 

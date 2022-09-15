@@ -17,6 +17,13 @@ actions:
     permissions:
       - role: user
       - role: anonymous
+  - name: uploadeImage
+    definition:
+      kind: synchronous
+      handler: http://localhost:5000/uploadeImage
+    permissions:
+      - role: anonymous
+      - role: user
 custom_types:
   enums: []
   input_objects: []
@@ -24,4 +31,5 @@ custom_types:
     - name: LoginOutput
     - name: SignUpOutput
     - name: AddUserOutput
+    - name: UploadeImageOutput
   scalars: []

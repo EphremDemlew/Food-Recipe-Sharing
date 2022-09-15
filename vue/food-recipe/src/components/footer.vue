@@ -5,7 +5,7 @@
     <div class="md:flex md:justify-between">
       <div class="mb-6 md:mb-0">
         <router-link to="/" class="flex items-center">
-          <img src="../assets/hot-pot.png" class="mr-3 h-8" alt="logo" />
+          <img src="../assets/bibimbap.png" class="mr-3 h-8" alt="logo" />
           <span
             class="self-center text-2xl font-semibold text-red-500 whitespace-nowrap"
             >Eph</span
@@ -19,9 +19,13 @@
             to="/home"
             >Home</router-link
           >
-          <router-link class="mb-6 text-sm text-white" to="/contact"
-            >Contact</router-link
-          >
+          <ul>
+            <li class="mb-4">
+              <router-link class="mb-6 text-sm text-white" to="/contact"
+                >Contact</router-link
+              >
+            </li>
+          </ul>
         </div>
         <div>
           <h2 class="mb-6 text-sm font-semibold text-white uppercase">

@@ -5,6 +5,10 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const signup_query = require("./queries/signup_query");
 const login_query = require("./queries/login_query");
+const uploade_query = require("./queries/fileUploade_query");
+const multer = require("multer");
+const upload = multer({ dest: "images/" });
+
 require("dotenv").config();
 
 const app = express();
@@ -40,6 +44,20 @@ const login_execute = async (variables) => {
     headers: { "x-hasura-admin-secret": "myadminsecretkey" },
     body: JSON.stringify({
       query: login_query,
+      variables,
+    }),
+  });
+  const data = await fetchResponse.json();
+  console.log("DEBUG: ", data);
+  return data;
+};
+// imageUploade query execute
+const uploade_execute = async (variables) => {
+  const fetchResponse = await fetch("http://localhost:8080/v1/graphql", {
+    method: "POST",
+    headers: { "x-hasura-admin-secret": "myadminsecretkey" },
+    body: JSON.stringify({
+      query: uploade_query,
       variables,
     }),
   });
@@ -144,6 +162,28 @@ app.post("/Login", async (req, res) => {
   return res.json({
     ...data.users[0],
     token: token,
+  });
+});
+
+// uploade Request Handler
+app.post("/uploadeImage", upload.array("photos", 12), async (req, res) => {
+  // req.file;
+  // get request input
+  const { image_url } = req.body.input;
+  console.log("herrrrrrrrrrrrray");
+  console.log(req.body);
+  console.log(req.file);
+  // execute the Hasura operation
+  const { data, errors } = await uploade_execute({ image_url });
+
+  // if Hasura operation errors, then throw error
+  if (errors) {
+    return res.status(400).json(errors[0]);
+  }
+
+  // success
+  return res.json({
+    ...data.insert_images_one,
   });
 });
 

@@ -1,14 +1,16 @@
 import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
+import { useStorage } from "@vueuse/core";
+
 const router = useRouter();
 export const userLoginStore = defineStore("user", {
   state: () => ({
-    Id: "",
-    createdDate: "",
-    name: "",
-    email: "",
-    isLoggedIn: false,
-    foods: [],
+    Id: useStorage("id", ""),
+    createdDate: useStorage("createdDate", ""),
+    name: useStorage("name", ""),
+    email: useStorage("email", ""),
+    isLoggedIn: useStorage("isLoggedIn", false),
+    // isLoggedIn: false,
   }),
   getters: {},
   actions: {
@@ -23,12 +25,13 @@ export const userLoginStore = defineStore("user", {
     async logout() {
       this.isLoggedIn = false;
       window.localStorage.removeItem("token");
+      window.localStorage.removeItem("isLoggedIn");
+      window.localStorage.removeItem("id");
+      window.localStorage.removeItem("createdDate");
+      window.localStorage.removeItem("name");
+      window.localStorage.removeItem("eamil");
+      this.state.value = null;
+      this.$reset();
     },
-    async addFoods(...foods) {
-      this.foods = foods;
-    },
-  },
-  persist: {
-    enabled: true,
   },
 });

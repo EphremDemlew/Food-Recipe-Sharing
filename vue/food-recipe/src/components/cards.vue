@@ -1,23 +1,15 @@
-<script setup>
-defineProps({
-  title: String,
-  img_url: String,
-  like: Number,
-});
-</script>
-
 <template>
   <div
-    class="flex justify-center items-center w-72 md:mt-10 md:ml-10 md:px-5 lg:justify-evenly hover:scale-105 transform transition duration-500 cursor-pointer"
+    class="flex justify-center items-center w-72 md:mt-10 md:ml-10 lg:justify-evenly transform transition duration-500 cursor-pointer"
   >
     <div
-      class="bg-grey-500 rounded-lg p-6 w-fit text-black-100 z-10 shadow-2xl"
+      class="bg-grey-500 rounded-lg p-6 w-fit text-black-100 z-10 shadow-xl hover:shadow-2xl"
       style="cursor: auto"
     >
       <div class="flex flex-wrap items-center">
         <div class="flex md:h-64 lg:h-72 relative">
           <div
-            class="w-full p-0 relative sm:w-96 md:pr-4 hover:scale-105 transform transition duration-500 cursor-pointer"
+            class="container mx-auto md:pr-4 max-w-md cursor-pointer hover:shadow-2xl transform transition duration-500"
           >
             <img
               :src="img_url"
@@ -29,7 +21,7 @@ defineProps({
             <div class="flex flex-col w-full h-full">
               <div class="flex-1 pb-2">
                 <div
-                  class="w-full h-full relative hover:scale-105 transform transition duration-500 cursor-pointer"
+                  class="w-full h-full relative transform transition duration-500 cursor-pointer"
                 >
                   <img
                     :src="img_url"
@@ -40,7 +32,7 @@ defineProps({
 
               <div class="flex-1 pt-2 hidden md:block">
                 <div
-                  class="w-full h-full relative hover:scale-105 transform transition duration-500 cursor-pointer"
+                  class="w-full h-full relative transform transition duration-500 cursor-pointer"
                 >
                   <img
                     :src="img_url"
@@ -62,7 +54,7 @@ defineProps({
                 <button
                   class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-1 cursor-auto glow border-green-700 bg-green-500 text-green-900"
                 >
-                  <!-- {{ time }}  -->0 min
+                  <!-- {{ time }}  -->0 min{{ id }}
                 </button>
               </div>
             </div>
@@ -124,11 +116,14 @@ defineProps({
                 </button>
                 <div>
                   <button
+                    @click="favorite"
+                    value="12"
                     class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     <i
                       class="fa-solid fa-bookmark text-yellow-400 text-xl lg:mr-5 shadow-2xl cursor-pointer"
-                    ></i>
+                      ><span class="hidden">14</span></i
+                    >
                   </button>
                 </div>
               </div>
@@ -139,8 +134,45 @@ defineProps({
               in which you send modern emails.
             </p>
           </div>
-
-          <div class="w-full sm:flex-1 grid gap-4 grid-cols-2 pt-6">
+          <div class="flex flex-row justify-between pr-5 py-8">
+            <div class="flex space-x-1 items-center">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-7 w-7 text-red-500 hover:text-red-400 transition duration-100 cursor-pointer"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span>0</span>
+            </div>
+            <div class="flex space-x-1 items-center">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-7 w-7 text-gray-600 cursor-pointer"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  />
+                </svg>
+              </span>
+              <span>0</span>
+            </div>
+          </div>
+          <!-- <div class="w-full sm:flex-1 grid gap-4 grid-cols-2 pt-6">
             <i
               class="fa-solid fa-thumbs-up text-[#002D74] hover:text-[#001172] cursor-pointer"
             >
@@ -157,11 +189,26 @@ defineProps({
             >
               Preview
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  title: String,
+  img_url: String,
+  like: Number,
+  id: String,
+});
+const favorite = (e) => {
+  console.log(e.target);
+  console.log(e.target.span);
+  console.log("Favourite");
+  console.log(id);
+};
+</script>
 
 <style scoped></style>

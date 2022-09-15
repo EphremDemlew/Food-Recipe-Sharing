@@ -23,6 +23,12 @@ type Mutation {
   ): SignUpOutput
 }
 
+type Mutation {
+  uploadeImage(
+    image_url: String!
+  ): UploadeImageOutput
+}
+
 type LoginOutput {
   id: uuid!
   email: String!
@@ -47,5 +53,10 @@ type AddUserOutput {
   id: uuid!
   last_name: String!
   token: String!
+}
+
+type UploadeImageOutput {
+  id: uuid!
+  image_url: String!
 }
 
