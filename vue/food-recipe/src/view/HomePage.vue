@@ -49,7 +49,7 @@ console.log(recipesVals);
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .hero {
   background-image: url(../assets/bannerbackground.png);
   background-attachment: scroll;

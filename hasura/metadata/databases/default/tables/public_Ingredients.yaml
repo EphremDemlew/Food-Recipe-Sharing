@@ -13,8 +13,6 @@ insert_permissions:
           user:
             id:
               _eq: X-Hasura-User-Id
-      set:
-        recipe_id: x-hasura-User-Id
       columns:
         - ingridents
         - recipe_id
@@ -28,6 +26,7 @@ select_permissions:
         - id
         - recipe_id
       filter: {}
+      allow_aggregations: true
   - role: user
     permission:
       columns:
@@ -37,6 +36,7 @@ select_permissions:
         - id
         - recipe_id
       filter: {}
+      allow_aggregations: true
 update_permissions:
   - role: user
     permission:

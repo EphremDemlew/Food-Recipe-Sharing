@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center items-center w-72 md:mt-10 md:ml-10 lg:justify-evenly transform transition duration-500 cursor-pointer"
+    class="flex justify-center items-center bg-white md:mt-10 transform transition duration-500 cursor-pointer"
   >
     <div
       class="bg-grey-500 rounded-lg p-6 w-fit text-black-100 z-10 shadow-xl hover:shadow-2xl"

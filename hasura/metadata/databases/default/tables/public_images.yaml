@@ -12,8 +12,6 @@ insert_permissions:
         recipe:
           user_id:
             _eq: X-Hasura-User-Id
-      set:
-        recipe_id: x-hasura-User-Id
       columns:
         - image_url
         - recipe_id
@@ -36,6 +34,7 @@ select_permissions:
         - id
         - recipe_id
       filter: {}
+      allow_aggregations: true
 update_permissions:
   - role: user
     permission:

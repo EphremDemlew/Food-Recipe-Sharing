@@ -72,10 +72,8 @@ insert_permissions:
         user_id: x-hasura-user-id
       columns:
         - desc
-        - id
         - time
         - title
-        - user_id
 select_permissions:
   - role: anonymous
     permission:
@@ -87,9 +85,7 @@ select_permissions:
         - updated_at
         - id
         - user_id
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+      filter: {}
       allow_aggregations: true
   - role: user
     permission:
@@ -104,23 +100,20 @@ select_permissions:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      allow_aggregations: true
 update_permissions:
   - role: user
     permission:
       columns:
         - desc
-        - id
         - time
         - title
-        - user_id
       filter:
         user_id:
           _eq: X-Hasura-User-Id
       check:
         user_id:
           _eq: X-Hasura-User-Id
-      set:
-        user_id: x-hasura-user-id
 delete_permissions:
   - role: user
     permission:

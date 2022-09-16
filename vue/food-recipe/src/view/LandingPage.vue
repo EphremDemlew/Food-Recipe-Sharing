@@ -9,6 +9,10 @@ import { useRouter } from "vue-router";
 import { ref } from "@vue/reactivity";
 import { computed, onMounted } from "vue";
 
+defineProps({
+  load: String,
+  result: String,
+});
 const router = useRouter();
 const recipes = useProductStore();
 let loading = ref(false);
@@ -23,14 +27,12 @@ console.log(val);
 // router.push("/home");
 </script>
 <template>
-  <div class="md:mt-8 w-full" v-if="val != null">
-    <div
-      class="hero min-h-screen w-full bg-base-200 flex items-center justify-center -mt-10"
-    >
+  <div class="w-full">
+    <div class="hero min-h-screen w-full flex items-center justify-center">
       <div
         class="hero-content mt-4 flex flex-col justify-evenly items-center md:flex-row md:ml-20"
       >
-        <div class="basis-1/4 mt-24 md:mt-24">
+        <div class="basis-1/4 mt-36">
           <img
             src="../assets/chad-montano-eeqbbemH9-c-unsplash.jpg"
             class="max-w-sm rounded-lg shadow-2xl"
@@ -63,31 +65,37 @@ console.log(val);
       </div>
     </div>
     <search />
+    <!-- the {{ result }} is -->
+    <div v-if="load != false" class="flex justify-center items-center">
+      <loadingVue></loadingVue>
+    </div>
     <div
-      class="flex flex-col justify-center items-center md:flex-row md:justify-evenly"
+      v-if="result != null && result != false"
+      class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center bg-green-300 texture pb-10"
     >
       <div v-for="rec in val.recipe" :key="rec.id">
         <cards
-          class="flex w-96 justify-center items-center mb-10"
-          :title="rec.name"
+          class="w-96 place-items-center md:w- lg:w-80"
+          :title="rec.title"
           :id="rec.id"
           :img_url="rec.images[0].image_url"
           :like="rec.likes"
         />
       </div>
     </div>
-
-    <!-- <div v-if="loading == true" class="flex justify-center items-center">
-        <loadingVue></loadingVue>
-      </div> -->
   </div>
 </template>
 
 <style>
 .hero {
   background-image: url(../assets/bannerbackground.png);
-  background-attachment: scroll;
+  background-attachment: fixed;
   background-position: center bottom;
   background-size: cover;
+}
+.texture {
+  background-image: url(../assets/foodtexure.jpg);
+  background-blend-mode: soft-light;
+  background-blend-mode: screen;
 }
 </style>

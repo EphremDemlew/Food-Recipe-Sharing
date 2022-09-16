@@ -14,9 +14,8 @@ insert_permissions:
             id:
               _eq: X-Hasura-User-Id
       columns:
-        - steps
-        - id
         - recipe_id
+        - steps
 select_permissions:
   - role: anonymous
     permission:
@@ -25,6 +24,7 @@ select_permissions:
         - id
         - recipe_id
       filter: {}
+      allow_aggregations: true
   - role: user
     permission:
       columns:
@@ -32,13 +32,12 @@ select_permissions:
         - id
         - recipe_id
       filter: {}
+      allow_aggregations: true
 update_permissions:
   - role: user
     permission:
       columns:
         - steps
-        - id
-        - recipe_id
       filter:
         recipe:
           user:
