@@ -5,7 +5,7 @@
         <h1
           class="font-sans text-3xl font-semibold mb-5 text-gray-900 hidden md:block"
         >
-          Search for what your hart desires.
+          Search for what your heart desire.
         </h1>
       </div>
       <div class="overflow-hidden z-0 rounded-full relative p-3">

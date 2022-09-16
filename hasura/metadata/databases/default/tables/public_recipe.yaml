@@ -97,9 +97,7 @@ select_permissions:
         - updated_at
         - id
         - user_id
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+      filter: {}
       allow_aggregations: true
 update_permissions:
   - role: user

@@ -49,6 +49,7 @@ export const full_recipe_query = gql`
     }
   }
 `;
+
 export const recipe_query = gql`
   query recipes {
     recipe {
@@ -57,6 +58,60 @@ export const recipe_query = gql`
       likes
       images {
         image_url
+      }
+    }
+  }
+`;
+export const favorite_recipe_query = gql`
+  query {
+    favorite {
+      recipe {
+        id
+        title
+        desc
+        time
+        user_id
+        user {
+          email
+        }
+        images {
+          image_url
+        }
+        steps {
+          steps
+        }
+        Ingredients {
+          ingridents
+        }
+        categories {
+          category
+        }
+        comments {
+          comment
+        }
+        likes {
+          like
+        }
+        likes_aggregate {
+          aggregate {
+            count(columns: like)
+          }
+        }
+        comments_aggregate {
+          aggregate {
+            count(columns: comment)
+          }
+        }
+        ratings {
+          rating
+        }
+        ratings_aggregate {
+          aggregate {
+            avg {
+              rating
+            }
+          }
+        }
       }
     }
   }

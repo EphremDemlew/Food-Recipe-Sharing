@@ -136,7 +136,7 @@ app.post("/signup", async (req, res) => {
     iat: Date.now() / 1000,
     iss: "https://myapp.com/",
     "https://hasura.io/jwt/claims": {
-      "x-hasura-allowed-roles": ["user", "anonymous", "author"],
+      "x-hasura-allowed-roles": ["user", "anonymous", "admin"],
       "x-hasura-user-id": data.insert_users_one.id,
       "x-hasura-default-role": "user",
       "x-hasura-role": "user",
@@ -151,7 +151,6 @@ app.post("/signup", async (req, res) => {
   console.log(token);
   // success
 
-  data.author_id;
   return res.json({
     ...data.insert_users_one,
     token: token,
@@ -185,7 +184,7 @@ app.post("/Login", async (req, res) => {
     iat: Date.now() / 1000,
     iss: "https://myapp.com/",
     "https://hasura.io/jwt/claims": {
-      "x-hasura-allowed-roles": ["user", "anonymous", "author"],
+      "x-hasura-allowed-roles": ["user", "anonymous", "admin"],
       "x-hasura-user-id": data.users[0].id,
       "x-hasura-default-role": "user",
       "x-hasura-role": "user",

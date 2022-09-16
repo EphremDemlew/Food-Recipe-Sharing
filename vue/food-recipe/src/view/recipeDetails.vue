@@ -10,7 +10,7 @@
           />
           <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 bg-white">
             <h2 class="text-sm title-font text-gray-500 tracking-widest">
-              BRAND NAME
+              BRAND NAME{{ $route.params.id }}
             </h2>
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
               The Catcher in the Rye
@@ -370,8 +370,12 @@
                 </div>
               </div>
             </div> -->
-            <h1 class="text-gray-900 font-bold">Some reviews 0 likes</h1>
+            <h1 class="text-gray-900 font-bold">
+              Some reviews
+              {{ searchObject.likes_aggregate.aggregate.count }} likes
+            </h1>
             <div
+              v-if="searchObject.comments.length > 0"
               class="flex-col py-4 mx-auto mt-3 w-3/4 bg-white border-b-2 border-r-2 border-gray-200 sm:px-4 sm:py-4 md:px-4 sm:rounded-lg sm:shadow-sm md:w-full"
             >
               <div class="flex flex-row md-10">
@@ -392,7 +396,7 @@
                   <div
                     class="flex-1 px-2 ml-2 text-sm font-medium leading-loose text-gray-600"
                   >
-                    Very cool! I'll have to learn more about Tailwind.
+                    {{ searchObject.comments }}
                   </div>
                   <button
                     class="inline-flex items-center px-1 pt-2 ml-1 flex-column"
@@ -464,3 +468,28 @@
     </section>
   </div>
 </template>
+<script setup>
+import Loading from "../components/loading.vue";
+import { useProductStore } from "../stores/productStore";
+import { ref, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const route = useRoute();
+const recipes = useProductStore();
+
+let val = ref([]);
+let vals = ref("");
+
+const recipesVals = recipes.recipes[0].data;
+console.log(recipes.recipes[0].data);
+console.log("recipesVals from the details");
+// setTimeout(() => {
+val = recipes.recipes[0].data.recipe;
+vals = route.params.id;
+const searchObject = val.find((va) => va.id == vals);
+
+console.log("val is ");
+console.log(searchObject.title);
+console.log(val[0].id);
+console.log(recipes.getRecipeById(route.params.id));
+// }, 3000);
+</script>

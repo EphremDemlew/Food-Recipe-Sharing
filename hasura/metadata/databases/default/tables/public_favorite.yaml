@@ -19,7 +19,6 @@ insert_permissions:
         user_id: x-hasura-User-Id
       columns:
         - recipe_id
-        - user_id
 select_permissions:
   - role: user
     permission:
@@ -28,9 +27,8 @@ select_permissions:
         - recipe_id
         - user_id
       filter:
-        user:
-          id:
-            _eq: X-Hasura-User-Id
+        user_id:
+          _eq: X-Hasura-User-Id
       allow_aggregations: true
 delete_permissions:
   - role: user

@@ -60,7 +60,7 @@
             </div>
             <div class="flex flex-wrap text-center justify-between pt-4 mb-2">
               <div
-                class="flex flex-col justify-between w-full md:flex-row md:justify-between"
+                class="flex justify-between w-full md:flex-row md:justify-between"
               >
                 <div>
                   <span class="flex items-center">
@@ -132,16 +132,14 @@
                   </span>
                 </div>
                 <div>
-                  <button
-                    @click="favorite"
-                    value="12"
-                    class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  <router-link
+                    to="/favorite"
+                    class="inline-flex items-center px-5 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     <i
-                      class="fa-solid fa-bookmark text-yellow-400 text-xl lg:mr-5 shadow-2xl cursor-pointer"
-                      ><span class="hidden">14</span></i
-                    >
-                  </button>
+                      class="fa-solid fa-bookmark text-yellow-400 text-xl shadow-2xl cursor-pointer"
+                    ></i>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -170,23 +168,12 @@
               <span>0</span>
             </div>
             <div class="flex space-x-1 items-center">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-7 w-7 text-gray-600 cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                  />
-                </svg>
-              </span>
-              <span>0</span>
+              <button
+                @click="preview(title, id)"
+                class="w-full block text-center relative text-white font-bold text-sm bg-red-500 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75"
+              >
+                Preview
+              </button>
             </div>
           </div>
           <!-- <div class="w-full sm:flex-1 grid gap-4 grid-cols-2 pt-6">
@@ -214,17 +201,26 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+
+const router = useRouter();
+
 defineProps({
   title: String,
   img_url: String,
   like: Number,
   id: String,
 });
-const favorite = (e) => {
-  console.log(e.target);
-  console.log(e.target.span);
-  console.log("Favourite");
+const preview = (title, id) => {
+  const slug = ref("");
+
+  slug.value = title.toLowerCase().replace(/\s/g, "-");
+  console.log("slug " + slug);
   console.log(id);
+  router.push(`/recipe/${id}`);
+  // router.push({path: 'foo', params: { foo: bar }})
+  // router.push({ path: `recipe/${slug.value}`, params: { id: id } });
 };
 </script>
 

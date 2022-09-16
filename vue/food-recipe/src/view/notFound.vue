@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <body class="bg-gray-800 w-screen h-screen">
+  <body class="bg-green-300 w-screen h-screen mt-16 texture">
     <div class="flex items-center justify-center border-red-500 h-screen">
       <div class="bg-white border rounded-md mx-4 md:w-2/3">
         <div class="flex flex-col items-center py-16">

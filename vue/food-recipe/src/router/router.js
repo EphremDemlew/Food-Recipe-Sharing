@@ -1,31 +1,74 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../view/LandingPage.vue";
-import signup from "../view/signup.vue";
-import Home from "../view/HomePage.vue";
-import contact from "../view/contact.vue";
-import login from "../view/login.vue";
-import favorite from "../view/favorite.vue";
-import profile from "../view/profile.vue";
-import addRecipes from "../view/addRecipes.vue";
-import recipeDetails from "../view/recipeDetails.vue";
+import { userStore } from "../stores/userStore";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", component: LandingPage, name: "LandingPage" },
-    { path: "/home", component: Home, name: "Home" },
-    { path: "/contact", component: contact, name: "contact" },
-    { path: "/signup", component: signup, name: "signup" },
-    { path: "/login", component: login, name: "login" },
-    { path: "/favorite", component: favorite, name: "favorite" },
-    { path: "/profile", component: profile, name: "profile" },
-    { path: "/add-recipes", component: addRecipes, name: "recipes" },
-    { path: "/recipe", component: recipeDetails, name: "recipeDetails" },
+    {
+      path: "/home",
+      name: "Home",
+      component: () => import("../view/HomePage.vue"),
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      component: () => import("../view/contact.vue"),
+    },
+    {
+      path: "/signup",
+      name: "signup",
+      component: () => import("../view/signup.vue"),
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../view/login.vue"),
+    },
+    {
+      path: "/favorite",
+      name: "favorite",
+      component: () => import("../view/favorite.vue"),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: () => import("../view/profile.vue"),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/add-recipes",
+      name: "recipes",
+      component: () => import("../view/addRecipes.vue"),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/recipe/:id",
+      name: "recipeDetails",
+      component: () => import("../view/recipeDetails.vue"),
+    },
+
     {
       path: "/:pathMatch(.*)*",
       component: () => import("../view/notFound.vue"),
     },
   ],
+});
+router.beforeEach((to, from, next) => {
+  console.log("Global Guarde");
+  if (!to.meta.requiresAuth) {
+    next();
+    return;
+  }
+  const store = userStore();
+
+  if (store.isLoggedIn) {
+    next();
+  } else {
+    next({ name: "LandingPage" });
+  }
 });
 
 export default router;
