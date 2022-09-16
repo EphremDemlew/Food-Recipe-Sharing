@@ -1,12 +1,17 @@
 <script setup></script>
 <template>
-  <div class="md:mt-10">
-    <div class="bg-gray-800 text-gray-100 px-8 py-12">
+  <div class="mt-36 texture bg-blue-200">
+    <div class="text-gray-p00 px-8 py-12">
       <div class="text-center w-full flex justify-center">
-        <img src="../assets/hot-pot.png" class="h-16 mt-3 -mb-56" alt="" />
+        <img src="../assets/bibimbap.png" class="h-16 mt-3 -mb-56" alt="" />
+        <h2
+          class="text-4xl lg:text-5xl text-gray-700 font-bold leading-tight mt-6"
+        >
+          Hi
+        </h2>
       </div>
       <div
-        class="max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg"
+        class="max-w-screen-xl mt-10 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg"
       >
         <div class="flex flex-col justify-between">
           <div>
