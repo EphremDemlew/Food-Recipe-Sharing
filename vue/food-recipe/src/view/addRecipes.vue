@@ -6,7 +6,7 @@
       <div class="mt-5 relative left-0 w-full">
         <router-link
           to="/home"
-          class="bg-red-500 text-white pl-5 pr-10 py-2 rounded-md"
+          class="bg-red-500 text-white hidden md:inline-block pl-5 pr-10 py-2 rounded-md"
         >
           <i
             class="fa-solid fa-caret-left hover:-translate-x-2 duration-500 pr-16"
@@ -91,10 +91,14 @@
               v-model="recs.description"
               placeholder="Description"
             />
+            <label class="mt-2 -mb-4" for="time"
+              >The time it takes in minutes</label
+            >
             <input
               class="p-2 rounded-xl border"
               type="number"
               name="time"
+              id="time"
               v-model="recs.time"
               placeholder="Time required in minutes"
             />
@@ -269,46 +273,48 @@ const recs = ref({
 });
 
 const addRecipe = () => {
-  console.log("The value ");
-  console.log(recs);
-  console.log(recs.value);
-  console.log("The imageeeeeeeeeee ");
+  const filetypes = ["image/jpeg", "image/png", "image/gif"];
+  const max_size = 500000;
+  const tooLarge = ifile.value.size > max_size;
 
-  console.log(imgFile.value.files[0]);
-  const fd = new FormData();
-  fd.append("file", ifile.value);
-  fd.append("title", recs.value.title);
-  fd.append("description", recs.value.description);
-  fd.append("ingridents", recs.value.ingridents);
-  fd.append("steps", recs.value.steps);
-  fd.append("category", recs.value.cats);
-  fd.append("time", recs.value.time);
+  if (filetypes.includes(ifile.value.type) && !tooLarge) {
+    const fd = new FormData();
+    fd.append("file", ifile.value);
+    fd.append("title", recs.value.title);
+    fd.append("description", recs.value.description);
+    fd.append("ingridents", recs.value.ingridents);
+    fd.append("steps", recs.value.steps);
+    fd.append("category", recs.value.cats);
+    fd.append("time", recs.value.time);
 
-  name.value = "";
-  axios
-    .post("http://localhost:5000/uploadeImage", fd)
-    .then((res) => {
-      console.log(res);
-      error.value = false;
-      message.value = "File has been uploaded";
-    })
-    .catch((err) => {
-      console.error(err);
-      error.value = true;
-      message.value = "";
-      console.log(err.message);
-      console.log(err.data);
-    });
-
-  recs.value.title = "";
-  recs.value.description = "";
-  recs.value.ingridents = [];
-  recs.value.steps = [];
-  recs.value.cats = [];
-  recs.value.ingridentRows = 1;
-  recs.value.stepRows = 1;
-  recs.value.catRows = 1;
-  recs.value.time = 0;
+    name.value = "";
+    axios
+      .post("http://localhost:5000/uploadeImage", fd)
+      .then((res) => {
+        console.log(res);
+        error.value = false;
+        message.value = "File has been uploaded";
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    error.value = false;
+    message.value = "";
+    recs.value.title = "";
+    recs.value.description = "";
+    recs.value.ingridents = [];
+    recs.value.steps = [];
+    recs.value.cats = [];
+    recs.value.ingridentRows = 1;
+    recs.value.stepRows = 1;
+    recs.value.catRows = 1;
+    recs.value.time = 0;
+  } else {
+    error.value = true;
+    message.value = tooLarge
+      ? `Too large. Max size is ${max_size / 1000}Kb `
+      : "Only images are allowed";
+  }
 
   // const fd = new FormData();
 

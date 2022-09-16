@@ -13,10 +13,10 @@ console.log(recipes.recipes[0].data);
 console.log("recipesVals");
 console.log(recipesVals);
 
-watch(sort, (val) => {
-  router.push({ query: { sort: val } });
-  /* ... */
-});
+// watch(sort, (val) => {
+//   router.push({ query: { sort: val } });
+//   /* ... */
+// });
 </script>
 <template>
   <div>
