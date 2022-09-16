@@ -7,6 +7,7 @@ import login from "../view/login.vue";
 import favorite from "../view/favorite.vue";
 import profile from "../view/profile.vue";
 import addRecipes from "../view/addRecipes.vue";
+import recipeDetails from "../view/recipeDetails.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -19,6 +20,7 @@ const router = createRouter({
     { path: "/favorite", component: favorite, name: "favorite" },
     { path: "/profile", component: profile, name: "profile" },
     { path: "/add-recipes", component: addRecipes, name: "recipes" },
+    { path: "/recipe", component: recipeDetails, name: "recipeDetails" },
     {
       path: "/:pathMatch(.*)*",
       component: () => import("../view/notFound.vue"),

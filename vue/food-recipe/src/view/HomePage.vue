@@ -19,13 +19,13 @@ console.log(recipesVals);
     </div>
     <div class="">
       <div
-        class="flex flex-col justify-center items-center lg:flex-row md:color lg:justify-evenly"
         v-if="recipesVals"
+        class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center bg-green-100 texture pb-10"
       >
         <div v-for="rec in recipesVals.recipe" :key="rec.id">
           <cards
-            class="flex w-96 justify-center items-center mb-10"
-            :title="rec.name"
+            class="w-96 place-items-center lg:w-80"
+            :title="rec.title"
             :id="rec.id"
             :img_url="rec.images[0].image_url"
             :like="rec.likes"

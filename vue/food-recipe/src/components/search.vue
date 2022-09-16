@@ -1,6 +1,13 @@
 <template>
-  <div class="min-h-fit bg-white flex flex-col justify-center">
-    <div class="relative p-12 w-full sm:max-w-2xl sm:mx-auto">
+  <div class="min-h-fit bg-white flex flex-col justify-center items-center">
+    <div class="relative pt-12 scroll -pb-10 w-full sm:max-w-2xl sm:mx-auto">
+      <div class="text-center">
+        <h1
+          class="font-sans text-3xl font-semibold mb-5 text-gray-900 hidden md:block"
+        >
+          Search for what your hart desires.
+        </h1>
+      </div>
       <div class="overflow-hidden z-0 rounded-full relative p-3">
         <form role="form" class="relative flex z-50 bg-white rounded-full">
           <input

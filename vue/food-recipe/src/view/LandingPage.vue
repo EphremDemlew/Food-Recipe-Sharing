@@ -71,7 +71,7 @@ console.log(val);
     </div>
     <div
       v-if="result != null && result != false"
-      class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center bg-green-300 texture pb-10"
+      class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center bg-green-100 texture pb-10"
     >
       <div v-for="rec in val.recipe" :key="rec.id">
         <cards

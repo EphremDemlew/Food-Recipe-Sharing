@@ -121,7 +121,7 @@ const toggleNav = () => (showMenu.value = !showMenu.value);
         v-if="user.isLoggedIn == true"
         to="/add-recipes"
         type="button"
-        class="border bg-red-50 border-red-500 w-full my-3 md:w-96 focus:ring-4 h-fit focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="border bg-red-50 border-red-500 w-full my-3 md:max-w-md focus:ring-4 h-fit focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         <i class="fa-solid fa-plus"></i> Add Recipe
       </router-link>
