@@ -15,6 +15,9 @@
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
               The Catcher in the Rye
             </h1>
+            <h6 class="text-blue-700 text-sm">
+              by <span class="text-gray-900">{name}</span>
+            </h6>
             <div class="flex mb-4">
               <span class="flex items-center">
                 <svg
@@ -132,86 +135,126 @@
               </span>
               <!-- socialmedias not working now but for later -->
             </div>
-            <p class="leading-relaxed">descrpitions</p>
-            <div
-              class="flex flex-col mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5"
-            >
-              <!-- The Categories go here -->
-              <div class="flex">
-                <div>
-                  <span class="mr-3 mt-1">Categories: </span>
+            <div>
+              <p class="leading-relaxed">descrpitions</p>
+              <div
+                class="flex flex-col mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5"
+              >
+                <!-- The Categories go here -->
+                <div class="flex">
+                  <div>
+                    <span class="mr-3 mt-1">Categories: </span>
+                  </div>
+                  <div
+                    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-3 md:gap-4"
+                  >
+                    <button
+                      class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
+                    >
+                      catagories
+                    </button>
+                    <button
+                      class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
+                    >
+                      catagories
+                    </button>
+                    <button
+                      class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
+                    >
+                      catagories
+                    </button>
+                    <button
+                      class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
+                    >
+                      catagories
+                    </button>
+                    <button
+                      class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
+                    >
+                      catagories
+                    </button>
+                    <button
+                      class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
+                    >
+                      catagories
+                    </button>
+                  </div>
                 </div>
-                <div
-                  class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-3 md:gap-4"
-                >
-                  <button
-                    class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
-                  >
-                    catagories
-                  </button>
-                  <button
-                    class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
-                  >
-                    catagories
-                  </button>
-                  <button
-                    class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
-                  >
-                    catagories
-                  </button>
-                  <button
-                    class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
-                  >
-                    catagories
-                  </button>
-                  <button
-                    class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
-                  >
-                    catagories
-                  </button>
-                  <button
-                    class="cursor-text border-2 border-gray-300 rounded-full w-fit px-3 py-1 focus:outline-none mr-5 mb-3 md:mx-4 md:md-4"
-                  >
-                    catagories
-                  </button>
+                <!-- The Categories go here -->
+              </div>
+              <!-- The Images -->
+              <div
+                class="grid grid-cols-2 gap-3 max-w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+              >
+                <div class="">
+                  <img
+                    class="rounded-t-lg h-52"
+                    src="../assets/henry-co--odUkx8C2gg-unsplash.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="">
+                  <img
+                    class="rounded-t-lg h-52"
+                    src="../assets/henry-co--odUkx8C2gg-unsplash.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="">
+                  <img
+                    class="rounded-t-lg h-52"
+                    src="../assets/henry-co--odUkx8C2gg-unsplash.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="">
+                  <img
+                    class="rounded-t-lg h-52"
+                    src="../assets/henry-co--odUkx8C2gg-unsplash.jpg"
+                    alt=""
+                  />
                 </div>
               </div>
-              <!-- The Categories go here -->
-
-              <div class="bg-black w-full">
-                <span class="mr-3">time</span>
-                <div class="relative"></div>
-              </div>
-            </div>
-            <div class="flex">
-              <span class="title-font font-medium text-2xl text-gray-900"
-                >$58.00</span
-              >
-              <button
-                class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
-              >
-                Button
-              </button>
-              <button
-                class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
-              >
-                <svg
-                  fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
-                  ></path>
-                </svg>
-              </button>
+              <!-- The Images -->
             </div>
           </div>
         </div>
-
+        <section
+          class="relative flex-col flex items-center justify-center min-h-max antialiased bg-white bg-gray-100 min-w-full"
+        >
+          <!-- The Ingredients go here -->
+          <div class="w-full">
+            <span class="mr-3">Ingredients of {the title} </span>
+            <div class="relative">
+              <ul data-convert="mainingriedient">
+                <li class="clearfix" quantity="1" unit="Numbers" suffix="">
+                  <label class="clearfix"
+                    ><span class="inputouter"
+                      ><input
+                        name=""
+                        type="checkbox"
+                        id="1" /><span></span></span
+                    >1 {the Ingredients}</label
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- The Ingredients go here -->
+          <!-- The How/Steps go here -->
+          <div class="w-full">
+            <h3>How to make {the title}</h3>
+            <ul>
+              <li>
+                <span
+                  ><h4>Step 1 First</h4>
+                  <p>{steps}</p></span
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- The How/Steps go here -->
+        </section>
         <!-- The Comments  -->
 
         <section
