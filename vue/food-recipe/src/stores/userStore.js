@@ -16,7 +16,7 @@ export const userStore = defineStore("userStore", {
   actions: {
     async login(token, id, createdAt, name, email) {
       this.isLoggedIn = true;
-      this.id = id;
+      this.Id = id;
       this.createdDate = createdAt;
       this.name = name;
       this.email = email;

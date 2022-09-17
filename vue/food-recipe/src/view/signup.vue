@@ -1,7 +1,7 @@
 <template>
   <div>
     <section
-      class="bg-gray-50 min-h-screen flex items-center banner justify-center p-20"
+      class="bg-gray-50 min-h-screen flex items-center hero justify-center p-20"
     >
       <!-- login container -->
       <div
@@ -217,12 +217,3 @@ const {
   },
 }));
 </script>
-
-<style scoped>
-.banner {
-  background-image: url(../assets/bannerbackground.png);
-  background-attachment: scroll;
-  background-position: center left;
-  background-size: cover;
-}
-</style>

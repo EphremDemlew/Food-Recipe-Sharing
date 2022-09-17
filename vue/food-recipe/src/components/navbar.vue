@@ -6,9 +6,6 @@ const router = useRouter();
 const user = userStore();
 
 const logoutUser = () => {
-  console.log(user.name);
-  console.log(user.createdDate);
-  console.log(user);
   user.logout();
   // product.$reset;
   router.push("/login");
@@ -20,12 +17,12 @@ const toggleNav = () => (showMenu.value = !showMenu.value);
 <template>
   <!-- asdas -->
 
-  <div class="-mb-36 blur-0 backdrop-blur">
+  <div class="-mb-36 border border-red backdrop-blur-lg">
     <nav
       class="container blur-0 backdrop-blur w-screen px-6 py-6 md:flex md:justify-between md:items-center"
     >
       <div
-        class="flex items-center flex-col w-full justify-center lg:flex-row md:justify-between"
+        class="flex items-center w-full justify-center md:flex-row md:justify-between"
       >
         <div class="">
           <router-link

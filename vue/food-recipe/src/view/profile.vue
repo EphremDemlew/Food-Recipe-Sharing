@@ -57,9 +57,5 @@
 import { userStore } from "../stores/userStore";
 const user = userStore();
 </script>
-<style scoped>
-body {
-  background-image: url(../assets/14589.jpg);
-  background-size: cover;
-}
+
 </style>

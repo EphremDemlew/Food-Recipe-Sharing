@@ -3,7 +3,7 @@
     <div class="relative pt-12 scroll -pb-10 w-full sm:max-w-2xl sm:mx-auto">
       <div class="text-center">
         <h1
-          class="font-sans text-3xl font-semibold mb-5 text-gray-900 hidden md:block"
+          class="font-sans text-3xl font-semibold mb-5 bg-red-50 bg-opacity-50 hidden md:block"
         >
           Search for what your heart desire.
         </h1>

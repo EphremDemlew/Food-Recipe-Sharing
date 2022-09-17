@@ -5,8 +5,10 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const signup_query = require("./queries/signup_query");
 const login_query = require("./queries/login_query");
-const uploade_query = require("./queries/fileUploade_query");
+const { image_Hasura_operation } = require("./queries/fileUploade_query");
 const multer = require("multer");
+const sharp = require("sharp");
+const fs = require("fs");
 const path = require("path");
 
 const storage = multer.diskStorage({
@@ -88,12 +90,12 @@ const uploade_execute = async (variables) => {
     method: "POST",
     headers: { "x-hasura-admin-secret": "myadminsecretkey" },
     body: JSON.stringify({
-      query: uploade_query,
+      query: image_Hasura_operation,
       variables,
     }),
   });
   const data = await fetchResponse.json();
-  console.log("DEBUG: ", data);
+  console.log("File DEBUG: ", data);
   return data;
 };
 
@@ -195,15 +197,78 @@ app.post("/Login", async (req, res) => {
   });
 });
 
+let vals;
 // uploade Request Handler
-app.post("/uploadeImage", upload.single("file"), (req, res) => {
-  const { title, description, ingridents, steps, category, time } = req.body;
-  console.log(title, description, ingridents, steps, category, time);
+app.post("/uploadeImage", upload.single("file"), async (req, res) => {
+  console.log(req.body);
+  vals = req.body;
+  const { title, description, ingridents, steps, time, category } = req.body;
+  console.log("tttttt");
+  console.log(title);
 
-  console.log(ingridents);
-  console.log(req.file.path);
-  console.log(req.file);
-  res.json({ file: req.file });
+  try {
+    await sharp(req.file.path).toFile(
+      `./public/images/${req.file.originalname}`
+    );
+    fs.unlink(req.file.path, () => {
+      res.json({ file: `/images/${req.file.originalname}` });
+    });
+  } catch (error) {
+    res.status(422).json({ error });
+  }
+});
+
+app.post("");
+
+const HASURA_OPERATION = `
+mutation ($title: String!, $time: numeric!, $desc: String!) {
+  insert_recipe_one( object: {desc: $desc, time: $time, title: $title}) {
+    id
+  }
+}
+`;
+
+// execute the parent operation in Hasura
+const execute = async (variables) => {
+  const fetchResponse = await fetch("http://localhost:8080/v1/graphql", {
+    method: "POST",
+    headers: { "x-hasura-admin-secret": "myadminsecretkey" },
+    body: JSON.stringify({
+      query: HASURA_OPERATION,
+      variables,
+    }),
+  });
+  const data = await fetchResponse.json();
+  console.log("DEBUG: ", data);
+  return data;
+};
+
+// Request Handler
+app.post("/InsertRecipeOneDerived", async (req, res) => {
+  // get request input
+  console.log("The Handeler");
+
+  console.log(vals);
+  // const { title, time, desc } = req.body.input;
+  console.log("The Handeler");
+  // console.log(vals.title);
+  // run some business logic
+  const title = vals.title;
+  const time = vals.time;
+  const desc = vals.description;
+
+  // execute the Hasura operation
+  const { data, errors } = await execute({ title, time, desc });
+
+  // if Hasura operation errors, then throw error
+  if (errors) {
+    return res.status(400).json(errors[0]);
+  }
+
+  // success
+  return res.json({
+    ...data.insert_recipe_one,
+  });
 });
 
 // app.post("/addRecipe", fileUploade);

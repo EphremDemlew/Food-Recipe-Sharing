@@ -1,4 +1,12 @@
 type Mutation {
+  InsertRecipeOneDerived(
+    title: String!
+    time: numeric!
+    desc: String!
+  ): InsertRecipeOneDerivedOutput
+}
+
+type Mutation {
   addUser(
     email: String!
     first_name: String
@@ -58,5 +66,9 @@ type AddUserOutput {
 type UploadeImageOutput {
   id: uuid!
   image_url: String!
+}
+
+type InsertRecipeOneDerivedOutput {
+  id: uuid!
 }
 

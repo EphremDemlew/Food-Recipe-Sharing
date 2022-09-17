@@ -11,6 +11,7 @@
           <div
             class="container mx-auto md:pr-4 max-w-md cursor-pointer hover:shadow-2xl transform transition duration-500"
           >
+            <!-- :src="'http://localhost:5000/' + img_url" alt="gh"  -->
             <img
               :src="img_url"
               class="w-full h-full object-cover object-top rounded-lg bg-white"

@@ -1,4 +1,10 @@
 actions:
+  - name: InsertRecipeOneDerived
+    definition:
+      kind: synchronous
+      handler: http://localhost:5000/InsertRecipeOneDerived
+    permissions:
+      - role: user
   - name: addUser
     definition:
       kind: synchronous
@@ -32,4 +38,5 @@ custom_types:
     - name: SignUpOutput
     - name: AddUserOutput
     - name: UploadeImageOutput
+    - name: InsertRecipeOneDerivedOutput
   scalars: []

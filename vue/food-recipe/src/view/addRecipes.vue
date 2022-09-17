@@ -185,10 +185,10 @@
                     drag and drop
                   </p>
                   <p
-                    v-if="imgFile != ''"
+                    v-if="ifile.length > 0"
                     class="text-base text-gray-500 dark:text-gray-400"
                   >
-                    {{ name }}
+                    {{ file.name }}
                   </p>
                   <p
                     v-if="name == ''"
@@ -251,13 +251,16 @@ import { ErrorMessage, Form, Field } from "vee-validate";
 import { userStore } from "../stores/userStore";
 import * as yup from "yup";
 import axios from "axios";
-import { computed } from "@vue/runtime-core";
+import { recipeUploade } from "../graphql/index";
+const user = userStore();
+
 const router = useRouter();
 let users = ref({});
 let imgFile = ref("");
+let img_url = ref("");
 let name = ref("");
 let ifile = ref({});
-let error = ref(false);
+let errors = ref(false);
 let message = ref("");
 
 const recs = ref({
@@ -288,17 +291,38 @@ const addRecipe = () => {
     fd.append("time", recs.value.time);
 
     name.value = "";
+    console.log("the fs is...........");
+    console.log(fd);
     axios
       .post("http://localhost:5000/uploadeImage", fd)
       .then((res) => {
         console.log(res);
-        error.value = false;
+        errors.value = false;
         message.value = "File has been uploaded";
+        img_url.value = res.data.file;
+
+        // 'http://localhost:5000/' + img_url"
+        const r_uploade = async () => {
+          let current_recipe_id = 15615;
+
+          // let variable = {
+          //   image_url: [
+          //     {
+          //       image_url: "http://localhost:5000/" + img_url,
+          //       recipe_id: current_recipe_id,
+          //     },
+          //   ],
+          // };
+
+          console.log("The function is caleed");
+          uploadeRecipe();
+        };
+        r_uploade();
       })
       .catch((err) => {
         console.error(err);
       });
-    error.value = false;
+    errors.value = false;
     message.value = "";
     recs.value.title = "";
     recs.value.description = "";
@@ -310,7 +334,7 @@ const addRecipe = () => {
     recs.value.catRows = 1;
     recs.value.time = 0;
   } else {
-    error.value = true;
+    errors.value = true;
     message.value = tooLarge
       ? `Too large. Max size is ${max_size / 1000}Kb `
       : "Only images are allowed";
@@ -320,7 +344,24 @@ const addRecipe = () => {
 
   // fd.append();
 };
-
+const {
+  mutate: uploadeRecipe,
+  loading: loading,
+  error: error,
+  onDone,
+} = useMutation(recipeUploade, () => ({
+  variables: {
+    title: recs.value.title,
+    time: recs.value.time,
+    desc: recs.value.description,
+  },
+}));
+onDone((result) => {
+  console.log("God thanks");
+  console.log(result);
+  console.log("God thanks");
+  console.log(result.id);
+});
 const addIngridentRows = () => {
   recs.value.ingridentRows++;
 };
@@ -337,16 +378,9 @@ const selectFile = (value) => {
   // recs.value.stepRows++;
   ifile.value = value.target.files[0];
   console.log(ifile.value);
-  error.value = false;
+  errors.value = false;
   message.value = "";
 };
 </script>
 
-<style scoped>
-.banner {
-  background-image: url(../assets/bannerbackground.png);
-  background-attachment: scroll;
-  background-position: center left;
-  background-size: cover;
-}
-</style>
+<style scoped></style>

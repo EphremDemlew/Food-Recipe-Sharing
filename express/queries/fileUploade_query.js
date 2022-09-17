@@ -123,8 +123,8 @@ module.exports = favorite_Hasura_operation;
 ////////////////////////////////// Comment ///////////////////////////////////////////////////
 
 const comment_Hasura_operation = `
-mutation($comment:String! ,$user_id:uuid!, $recipe_id:uuid! ,  ) {
-  insert_comment(objects: {comment: $comment, user_id: $user_id, recipe_id: $recipe_id}) {
+mutation($comment:String! , $recipe_id:uuid! ,  ) {
+  insert_comment(objects: {comment: $comment,  recipe_id: $recipe_id}) {
     affected_rows
   }
 }

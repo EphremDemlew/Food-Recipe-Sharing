@@ -68,11 +68,4 @@ console.log(recipesVals);
     </div>
   </div>
 </template>
-<style scoped>
-.hero {
-  background-image: url(../assets/bannerbackground.png);
-  background-attachment: scroll;
-  background-position: center right;
-  background-size: cover;
-}
-</style>
+<style scoped></style>

@@ -157,3 +157,11 @@ export const imgUploade = gql`
     }
   }
 `;
+
+export const recipeUploade = gql`
+  mutation ($title: String!, $time: numeric!, $desc: String!) {
+    insert_recipe_one(object: { desc: $desc, time: $time, title: $title }) {
+      id
+    }
+  }
+`;

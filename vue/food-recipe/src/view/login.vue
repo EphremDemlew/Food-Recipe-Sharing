@@ -168,6 +168,8 @@ const loginUser = async (value) => {
       const email = res.data.login.email;
       const createdDate = res.data.login.created_at;
       user.login(token, Id, createdDate, name, email);
+      console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+      console.log(Id);
       // toste();
       router.push("/home");
 
@@ -184,9 +186,4 @@ const loginUser = async (value) => {
 // }
 </script>
 
-<style scoped>
-.hero {
-  background-image: url(../assets/bannerbackground.png);
-  background-size: contain;
-}
-</style>
+<style scoped></style>

@@ -38,8 +38,12 @@ console.log(val);
             class="max-w-sm rounded-lg shadow-2xl"
           />
         </div>
-        <div class="basis-3/4 mx-24 mt-10">
-          <h1 class="text-5xl font-bold">Find a Recipe</h1>
+        <div
+          class="basis-3/4 mx-24 mt-10 h-full bg-red-50 bg-opacity-70 shadow-2xl rounded-3xl py-5 px-5 md:mt-32"
+        >
+          <h1 class="text-5xl font-bold">
+            Find a recipe<span class="text-red-500">!</span>
+          </h1>
           <p class="py-6">
             Search through the recipes tailored to your needs. When you favorite
             a recipe, you can jump right into making it now, or put it on your
@@ -88,9 +92,9 @@ console.log(val);
 
 <style>
 .hero {
-  background-image: url(../assets/bannerbackground.png);
+  background-image: url(../assets/oie_pnkme2e83ufr.jpg);
   background-attachment: fixed;
-  background-position: center bottom;
+  background-position: center left;
   background-size: cover;
 }
 .texture {
