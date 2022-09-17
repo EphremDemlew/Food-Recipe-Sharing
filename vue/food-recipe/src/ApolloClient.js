@@ -3,29 +3,26 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client/core";
+import { setContext } from "@apollo/client/link/context";
 
-// const getHeaders = () => {
-//   const headers = {};
-//   const token = window.localStorage.getItem("apollo-token");
-//   if (token) {
-//     headers.authorization = `Bearer ${token}`;
-//   }
-//   return headers;
-// };
-// HTTP connection to the API
 const httpLink = createHttpLink({
-  // You should use an absolute URL here
   uri: "http://localhost:8080/v1/graphql",
-  // fetch,
-  // headers: getHeaders(),
 });
 
-// Cache implementation
-const cache = new InMemoryCache();
+const token = window.localStorage.getItem("token");
 
-// Create the apollo client
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers, // Include any existing headers
+      ...((token && { authorization: `Bearer ${token}` }) || ""),
+    },
+  };
+});
+const cache = new InMemoryCache();
+const link = authLink.concat(httpLink);
 const apolloClient = new ApolloClient({
-  link: httpLink,
+  link,
   cache,
 });
 

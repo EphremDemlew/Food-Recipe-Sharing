@@ -1,7 +1,7 @@
 <template>
   <div>
     <section
-      class="bg-gray-50 min-h-screen flex flex-col items-center banner justify-center p-20"
+      class="bg-green-200 texture min-h-screen flex flex-col items-center banner justify-center px-20"
     >
       <div class="mt-5 relative left-0 w-full">
         <router-link
@@ -66,7 +66,7 @@
       </div>
       <!-- alert -->
       <div
-        class="bg-white text-center mt-10 flex rounded-2xl max-w-3xl p-5 items-center"
+        class="bg-white shadow-2xl text-center mt-10 flex rounded-2xl max-w-3xl p-5 items-center"
       >
         <!-- form -->
         <div class="">
@@ -276,73 +276,7 @@ const recs = ref({
 });
 
 const addRecipe = () => {
-  const filetypes = ["image/jpeg", "image/png", "image/gif"];
-  const max_size = 500000;
-  const tooLarge = ifile.value.size > max_size;
-
-  if (filetypes.includes(ifile.value.type) && !tooLarge) {
-    const fd = new FormData();
-    fd.append("file", ifile.value);
-    fd.append("title", recs.value.title);
-    fd.append("description", recs.value.description);
-    fd.append("ingridents", recs.value.ingridents);
-    fd.append("steps", recs.value.steps);
-    fd.append("category", recs.value.cats);
-    fd.append("time", recs.value.time);
-
-    name.value = "";
-    console.log("the fs is...........");
-    console.log(fd);
-    axios
-      .post("http://localhost:5000/uploadeImage", fd)
-      .then((res) => {
-        console.log(res);
-        errors.value = false;
-        message.value = "File has been uploaded";
-        img_url.value = res.data.file;
-
-        // 'http://localhost:5000/' + img_url"
-        const r_uploade = async () => {
-          let current_recipe_id = 15615;
-
-          // let variable = {
-          //   image_url: [
-          //     {
-          //       image_url: "http://localhost:5000/" + img_url,
-          //       recipe_id: current_recipe_id,
-          //     },
-          //   ],
-          // };
-
-          console.log("The function is caleed");
-          uploadeRecipe();
-        };
-        r_uploade();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    errors.value = false;
-    message.value = "";
-    recs.value.title = "";
-    recs.value.description = "";
-    recs.value.ingridents = [];
-    recs.value.steps = [];
-    recs.value.cats = [];
-    recs.value.ingridentRows = 1;
-    recs.value.stepRows = 1;
-    recs.value.catRows = 1;
-    recs.value.time = 0;
-  } else {
-    errors.value = true;
-    message.value = tooLarge
-      ? `Too large. Max size is ${max_size / 1000}Kb `
-      : "Only images are allowed";
-  }
-
-  // const fd = new FormData();
-
-  // fd.append();
+  uploadeRecipe();
 };
 const {
   mutate: uploadeRecipe,
@@ -356,11 +290,44 @@ const {
     desc: recs.value.description,
   },
 }));
-onDone((result) => {
-  console.log("God thanks");
-  console.log(result);
-  console.log("God thanks");
-  console.log(result.id);
+
+onDone((res) => {
+  console.log("The data is  .............//");
+
+  console.log("The data is  .............");
+  console.log(res.data.insert_recipe_one);
+
+  const recipeID = res.data.insert_recipe_one.id;
+  const filetypes = ["image/jpeg", "image/png", "image/gif"];
+  const max_size = 500000;
+  const tooLarge = ifile.value.size > max_size;
+
+  if (filetypes.includes(ifile.value.type) && !tooLarge) {
+    const fd = new FormData();
+    fd.append("file", ifile.value);
+    fd.append("recipeID", recipeID);
+
+    axios
+      .post("http://localhost:5000/uploadeImage", fd)
+      .then((res) => {
+        console.log(res);
+        errors.value = false;
+        message.value = "File has been uploaded";
+        // 'http://localhost:5000/' + img_url"
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    errors.value = false;
+    message.value = "";
+  } else {
+    errors.value = true;
+    message.value = tooLarge
+      ? `Too large. Max size is ${max_size / 1000}Kb `
+      : "Only images are allowed";
+  }
+
+  return;
 });
 const addIngridentRows = () => {
   recs.value.ingridentRows++;

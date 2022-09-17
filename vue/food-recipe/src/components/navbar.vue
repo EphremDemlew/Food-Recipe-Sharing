@@ -17,9 +17,9 @@ const toggleNav = () => (showMenu.value = !showMenu.value);
 <template>
   <!-- asdas -->
 
-  <div class="-mb-36 border border-red backdrop-blur-lg">
+  <div class="border-b backdrop-blur-none bg-white">
     <nav
-      class="container blur-0 backdrop-blur w-screen px-6 py-6 md:flex md:justify-between md:items-center"
+      class="container blur-0 backdrop-blur w-screen px-6 py-3 md:flex md:justify-between md:items-center"
     >
       <div
         class="flex items-center w-full justify-center md:flex-row md:justify-between"
@@ -98,7 +98,7 @@ const toggleNav = () => (showMenu.value = !showMenu.value);
         v-if="user.isLoggedIn == false"
         to="/signup"
         type="button"
-        class="text-white md:mx-10 bg-red-500 mr-16 border border-red-500 hover:bg-red-600 h-fit w-full md:w-64 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="text-white md:mx-10 bg-red-500 mr-16 border border-red-500 hover:bg-red-600 h-fit w-full md:w-64 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0"
       >
         Sign Up
       </router-link>
@@ -135,3 +135,4 @@ const toggleNav = () => (showMenu.value = !showMenu.value);
   </div>
   <!-- asdas -->
 </template>
+<style scoped></style>

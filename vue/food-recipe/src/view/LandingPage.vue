@@ -28,9 +28,9 @@ console.log(val);
 </script>
 <template>
   <div class="w-full">
-    <div class="hero min-h-screen w-full flex items-center justify-center">
+    <div class="bg-black -mt-20 hero flex items-center justify-center">
       <div
-        class="hero-content mt-4 flex flex-col justify-evenly items-center md:flex-row md:ml-20"
+        class="hero-content flex flex-col justify-evenly items-center md:flex-row md:ml-20"
       >
         <div class="basis-1/4 mt-36">
           <img
@@ -101,5 +101,9 @@ console.log(val);
   background-image: url(../assets/foodtexure.jpg);
   background-blend-mode: soft-light;
   background-blend-mode: screen;
+}
+li .router-link-active {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 </style>

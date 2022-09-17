@@ -164,13 +164,42 @@
               <div
                 class="grid grid-cols-2 gap-3 max-w-full mb-5 md:mb-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
               >
-                <div v-for="imgs in favouriteRecipe.images" :key="imgs.id">
-                  <img
-                    class="rounded-t-lg h-52"
-                    :src="imgs.image_url"
-                    :alt="`${favouriteRecipe.title}.jpg`"
-                  />
+                <div
+                  v-for="imgs in favouriteRecipe.images"
+                  :key="imgs.id"
+                  class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box"
+                >
+                  <div class="carousel-item">
+                    <img
+                      src="https://placeimg.com/250/180/arch"
+                      class="rounded-box"
+                    />
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="https://placeimg.com/250/180/arch"
+                      class="rounded-box"
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="https://placeimg.com/250/180/arch"
+                      class="rounded-box"
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="https://placeimg.com/250/180/arch"
+                      class="rounded-box"
+                    />
+                  </div>
                 </div>
+                <img
+                  class="rounded-t-lg h-52"
+                  :src="imgs.image_url"
+                  :alt="`${favouriteRecipe.title}.jpg`"
+                />
               </div>
               <!-- The Images -->
             </div>

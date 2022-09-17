@@ -1,7 +1,7 @@
 <template>
   <div>
     <section
-      class="bg-gray-50 min-h-screen flex items-center hero justify-center p-20"
+      class="bg-gray-50 min-h-screen mt-20 shadow-sm flex items-center hero justify-center px-20"
     >
       <!-- login container -->
       <div
