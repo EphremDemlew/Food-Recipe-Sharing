@@ -236,7 +236,7 @@
             </p>
             <ul>
               <li v-for="(steps, i) in favouriteRecipe.steps" :key="steps.id">
-                <span class="pr-1">Step {{ i + 1 }} </span>
+                <span class="pr-1">Step {{ i + 1 }} :</span>
                 {{ steps.steps }}
               </li>
             </ul>
@@ -246,7 +246,7 @@
         <!-- The Comments  -->
 
         <section
-          class="mt-10 relative flex items-center justify-center min-h-max antialiased bg-gray-300 pb-10 min-w-full rounded-md"
+          class="mt-10 relative flex items-center justify-center min-h-max antialiased bg-gray-600 pb-10 min-w-full rounded-md"
         >
           <div
             class="container px-0 sm:px-5 flex flex-col justify-center mt-10"
@@ -360,7 +360,7 @@
                 </div>
               </div>
             </div> -->
-            <h1 class="text-gray-900 font-bold mx-auto">
+            <h1 class="text-white font-bold mx-auto">
               Some reviews
               {{ favouriteRecipe.likes_aggregate.aggregate.count }} likes
             </h1>
