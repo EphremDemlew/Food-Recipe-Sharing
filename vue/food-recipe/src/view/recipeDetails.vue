@@ -1,16 +1,19 @@
 <template>
   <div>
-    <section class="text-gray-700 body-font overflow-hidden mt-10 bg-white">
-      <div class="container px-5 py-24 mx-auto texture bg-green-100">
+    <section class="text-gray-100 body-font overflow-hidden bg-gray-900">
+      <div class="container px-5 py-24 mx-auto bg-Gray-900">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
+          <!-- :src="favouriteRecipe.images[0].image_url" -->
           <img
             alt="ecommerce"
-            class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
+            class="lg:w-1/2 w-full object-cover object-center rounded"
             :src="favouriteRecipe.images[0].image_url"
           />
-          <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 bg-white">
-            <h2 class="text-sm title-font text-gray-500 tracking-widest"></h2>
-            <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+          <div
+            class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 text-white lg:mt-0 bg-gray-900"
+          >
+            <h2 class="text-sm title-font text-gray-200 tracking-widest"></h2>
+            <h1 class="text-gray-50 text-3xl title-font font-medium mb-1">
               {{ favouriteRecipe.title }}
             </h1>
 
@@ -161,7 +164,7 @@
                 <!-- The Categories go here -->
               </div>
               <!-- The Images -->
-              <div
+              <!-- <div
                 class="grid grid-cols-2 gap-3 max-w-full mb-5 md:mb-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
               >
                 <div
@@ -200,48 +203,42 @@
                   :src="imgs.image_url"
                   :alt="`${favouriteRecipe.title}.jpg`"
                 />
-              </div>
+              </div> -->
               <!-- The Images -->
             </div>
           </div>
         </div>
         <section
-          class="relative flex-col flex items-center justify-center min-h-max antialiased bg-white bg-gray-100 min-w-full"
+          class="mt-10 px-10 relative flex-row items-center lg:flex lg:justify-evenly lg:items-start py-10 -r min-h-max antialiased bg-gray-600 rounded-lg min-w-full"
         >
           <!-- The Ingredients go here -->
-          <div class="w-full">
-            <span class="mr-3"
-              >Ingredients of {{ favouriteRecipe.title }}
-            </span>
+          <div class="text-white mb-10 lg:mb-0">
+            <p class="mr-3 bg-gray-500 py-2 px-10 rounded font-bold mb-3">
+              Ingredients of {{ favouriteRecipe.title }}
+            </p>
             <div class="relative">
-              <ul>
+              <ul class="">
                 <li
                   v-for="(ingridents, i) in favouriteRecipe.Ingredients"
                   :key="ingridents.id"
                 >
-                  <label
-                    ><span
-                      ><input
-                        name=""
-                        type="checkbox"
-                        id="1" /><span></span></span
-                    >{{ i + 1 }} {{ ingridents.ingridents }}</label
-                  >
+                  <span class="pr-1">{{ i + 1 }}.</span>
+                  {{ ingridents.ingridents }}
                 </li>
               </ul>
             </div>
           </div>
           <!-- The Ingredients go here -->
           <!-- The How/Steps go here -->
-          <div class="w-full">
-            <h3>How to make {{ favouriteRecipe.title }}</h3>
+          <div class="text-white">
+            <p class="mr-3 bg-gray-500 py-2 px-10 rounded font-bold mb-3">
+              How to make {{ favouriteRecipe.title }}
+            </p>
             <ul>
-              <ol v-for="(steps, i) in favouriteRecipe.steps" :key="steps.id">
-                <span
-                  ><h4>Step {{ i + 1 }}</h4>
-                  <p>{{ steps.steps }}</p></span
-                >
-              </ol>
+              <li v-for="(steps, i) in favouriteRecipe.steps" :key="steps.id">
+                <span class="pr-1">Step {{ i + 1 }} </span>
+                {{ steps.steps }}
+              </li>
             </ul>
           </div>
           <!-- The How/Steps go here -->
@@ -249,9 +246,11 @@
         <!-- The Comments  -->
 
         <section
-          class="relative flex items-center justify-center min-h-max antialiased bg-white bg-gray-100 min-w-full"
+          class="mt-10 relative flex items-center justify-center min-h-max antialiased bg-gray-300 pb-10 min-w-full rounded-md"
         >
-          <div class="container px-0 sm:px-56 flex flex-col justify-center">
+          <div
+            class="container px-0 sm:px-5 flex flex-col justify-center mt-10"
+          >
             <!-- <div
               class="flex-col w-full py-4 mx-auto bg-white border-b-2 border-r-2 border-gray-200 sm:px-4 sm:py-4 md:px-4 sm:rounded-lg sm:shadow-sm md:w-2/3"
             >
@@ -361,7 +360,7 @@
                 </div>
               </div>
             </div> -->
-            <h1 class="text-gray-900 font-bold">
+            <h1 class="text-gray-900 font-bold mx-auto">
               Some reviews
               {{ favouriteRecipe.likes_aggregate.aggregate.count }} likes
             </h1>
@@ -369,17 +368,17 @@
               <div
                 v-for="comments in favouriteRecipe.comments"
                 :key="comments.id"
-                class="flex-col py-4 mx-auto mt-3 w-3/4 bg-white border-b-2 border-r-2 border-gray-200 sm:px-4 sm:py-4 md:px-4 sm:rounded-lg sm:shadow-sm md:w-full"
+                class="flex-col py-4 mx-auto mt-3 w-3/4 bg-white border-b-2 border-r-2 border-gray-600 sm:px-4 sm:py-4 md:px-4 sm:rounded-lg sm:shadow-sm md:w-full"
               >
                 <div class="flex flex-row md-10">
                   <img
-                    class="w-12 h-12 border-2 border-gray-300 rounded-full"
+                    class="w-12 h-12 border-2 border-orange-500 rounded-full"
                     alt="Anonymous's avatar"
                     src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&faces=1&faceindex=1&facepad=2.5&w=500&h=500&q=80"
                   />
                   <div class="flex-col mt-1">
                     <div
-                      class="flex items-center flex-1 px-4 font-bold leading-tight"
+                      class="flex items-center flex-1 text-gray-800 px-4 font-bold leading-tight"
                     >
                       Anonymous
                       <span class="ml-2 text-xs font-normal text-gray-500"
@@ -429,23 +428,23 @@
             </div>
             <!-- Comment Form -->
             <div
-              class="rounded-lg shadow-md shadow-blue-600/50 w-full bg-white mt-5"
+              class="rounded-lg shadow-md shadow-blue-600/50 w-full bg-white mt-5 sm:px-4"
             >
               <form @submit.prevent="commentHandler" class="w-full p-4">
                 <div class="mb-2">
-                  <label for="comment" class="text-lg text-gray-600"
+                  <label for="comment" class="text-lg text-gray-800"
                     >Add a comment</label
                   >
                   <textarea
-                    class="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+                    class="w-full h-20 p-2 border text-gray-900 rounded focus:outline-none focus:ring-gray-900 focus:ring-1"
                     name="comment"
-                    placeholder=""
+                    placeholder="Comment here ..."
                     v-model="commentValue"
                   ></textarea>
                 </div>
                 <div>
                   <button
-                    class="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
+                    class="px-3 py-2 text-sm text-white bg-red-500 rounded"
                   >
                     Comment
                   </button>
@@ -480,5 +479,7 @@ val = recipes.recipes[0].data.recipe;
 vals = route.params.id;
 const favouriteRecipe = val.find((va) => va.id == vals);
 console.log(favouriteRecipe);
+console.log("Image");
+console.log(favouriteRecipe.images[0].image_url);
 // }, 3000);
 </script>
