@@ -198,11 +198,7 @@ app.post("/Login", async (req, res) => {
 });
 
 app.post("/uploadeImage", upload.single("file"), async (req, res) => {
-  console.log(req.body);
-  vals = req.body;
-  const { title, description, ingridents, steps, time, category } = req.body;
-  console.log("tttttt");
-  console.log(title);
+  console.log("From Server");
 
   try {
     await sharp(req.file.path).toFile(

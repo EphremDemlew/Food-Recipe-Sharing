@@ -1,11 +1,11 @@
 <template>
   <div>
     <section
-      class="bg-gray-50 min-h-screen mt-20 shadow-sm flex items-center hero justify-center px-20"
+      class="bg-blue-200 min-h-screen shadow-sm flex items-center texture justify-center px-20"
     >
       <!-- login container -->
       <div
-        class="bg-white text-center mt-10 flex rounded-2xl max-w-3xl p-5 items-center"
+        class="bg-white text-center mt-10 flex rounded-2xl max-w-3xl p-5 items-center shadow-2xl"
       >
         <!-- form -->
         <div class="">

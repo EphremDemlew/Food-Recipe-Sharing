@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <div class="mt-36 texture bg-blue-200">
+  <div class="texture bg-blue-200">
     <div class="text-gray-p00 px-8 py-12">
       <div class="text-center w-full flex justify-center">
         <img src="../assets/bibimbap.png" class="h-16 mt-3 -mb-56" alt="" />

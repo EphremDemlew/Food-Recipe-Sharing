@@ -1,7 +1,7 @@
 <template>
   <div>
     <section
-      class="bg-gray-50 min-h-screen flex flex-col items-center banner justify-center p-20"
+      class="bg-green-200 texture min-h-screen flex flex-col items-center banner justify-center px-20"
     >
       <div class="mt-5 relative left-0 w-full">
         <router-link
@@ -17,7 +17,7 @@
       <!-- aler -->
       <div class="fixed bottom-5 right-5">
         <div
-          v-if="error"
+          v-if="errors"
           class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
           role="alert"
         >
@@ -66,7 +66,7 @@
       </div>
       <!-- alert -->
       <div
-        class="bg-white text-center mt-10 flex rounded-2xl max-w-3xl p-5 items-center"
+        class="bg-white shadow-2xl text-center mt-10 flex rounded-2xl max-w-3xl p-5 items-center"
       >
         <!-- form -->
         <div class="">
@@ -184,12 +184,7 @@
                     <span class="font-semibold">Click to upload Images</span> or
                     drag and drop
                   </p>
-                  <p
-                    v-if="ifile.length > 0"
-                    class="text-base text-gray-500 dark:text-gray-400"
-                  >
-                    {{ file.name }}
-                  </p>
+
                   <p
                     v-if="name == ''"
                     class="text-xs text-gray-500 dark:text-gray-400"
@@ -206,6 +201,21 @@
                   />
                 </div>
               </label>
+            </div>
+            <div class="flex justify-between">
+              <div class="pl-5">
+                <p
+                  v-if="name != ''"
+                  class="text-base text-gray-500 dark:text-gray-400"
+                >
+                  {{ ifile.name }}
+                </p>
+              </div>
+              <div class="mr-5">
+                <button class="text-gray-900" @click="ifile.slic">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+              </div>
             </div>
 
             <button
@@ -232,7 +242,7 @@
 
               Add Recipe
             </button>
-            <p v-if="error" class="text-xs ml-4 text-red-500">
+            <p v-if="errors" class="text-xs ml-4 text-red-500">
               {{ message }}
             </p>
           </form>
@@ -251,13 +261,16 @@ import { ErrorMessage, Form, Field } from "vee-validate";
 import { userStore } from "../stores/userStore";
 import * as yup from "yup";
 import axios from "axios";
-import { computed } from "@vue/runtime-core";
+import { recipeUploade } from "../graphql/index";
+const user = userStore();
+
 const router = useRouter();
 let users = ref({});
 let imgFile = ref("");
+let img_url = ref("");
 let name = ref("");
 let ifile = ref({});
-let error = ref(false);
+let errors = ref(false);
 let message = ref("");
 
 const recs = ref({
@@ -273,6 +286,28 @@ const recs = ref({
 });
 
 const addRecipe = () => {
+  uploadeRecipe();
+};
+const {
+  mutate: uploadeRecipe,
+  loading: loading,
+  error: error,
+  onDone,
+} = useMutation(recipeUploade, () => ({
+  variables: {
+    title: recs.value.title,
+    time: recs.value.time,
+    desc: recs.value.description,
+  },
+}));
+
+onDone((res) => {
+  console.log("The data is  .............//");
+
+  console.log("The data is  .............");
+  console.log(res.data.insert_recipe_one);
+
+  const recipeID = res.data.insert_recipe_one.id;
   const filetypes = ["image/jpeg", "image/png", "image/gif"];
   const max_size = 500000;
   const tooLarge = ifile.value.size > max_size;
@@ -280,47 +315,36 @@ const addRecipe = () => {
   if (filetypes.includes(ifile.value.type) && !tooLarge) {
     const fd = new FormData();
     fd.append("file", ifile.value);
-    fd.append("title", recs.value.title);
-    fd.append("description", recs.value.description);
-    fd.append("ingridents", recs.value.ingridents);
-    fd.append("steps", recs.value.steps);
-    fd.append("category", recs.value.cats);
-    fd.append("time", recs.value.time);
+    // fd.append("recipeID", recipeID);
+    // fd.append("title", recs.value.title);
+    // fd.append("description", recs.value.description);
+    // fd.append("ingridents", recs.value.ingridents);
+    // fd.append("steps", recs.value.steps);
+    // fd.append("category", recs.value.cats);
+    // fd.append("time", recs.value.time);
 
-    name.value = "";
     axios
       .post("http://localhost:5000/uploadeImage", fd)
       .then((res) => {
         console.log(res);
-        error.value = false;
+        errors.value = false;
         message.value = "File has been uploaded";
+        // 'http://localhost:5000/' + img_url"
       })
       .catch((err) => {
         console.error(err);
       });
-    error.value = false;
+    errors.value = false;
     message.value = "";
-    recs.value.title = "";
-    recs.value.description = "";
-    recs.value.ingridents = [];
-    recs.value.steps = [];
-    recs.value.cats = [];
-    recs.value.ingridentRows = 1;
-    recs.value.stepRows = 1;
-    recs.value.catRows = 1;
-    recs.value.time = 0;
   } else {
-    error.value = true;
+    errors.value = true;
     message.value = tooLarge
       ? `Too large. Max size is ${max_size / 1000}Kb `
       : "Only images are allowed";
   }
 
-  // const fd = new FormData();
-
-  // fd.append();
-};
-
+  return;
+});
 const addIngridentRows = () => {
   recs.value.ingridentRows++;
 };
@@ -337,16 +361,9 @@ const selectFile = (value) => {
   // recs.value.stepRows++;
   ifile.value = value.target.files[0];
   console.log(ifile.value);
-  error.value = false;
+  errors.value = false;
   message.value = "";
 };
 </script>
 
-<style scoped>
-.banner {
-  background-image: url(../assets/bannerbackground.png);
-  background-attachment: scroll;
-  background-position: center left;
-  background-size: cover;
-}
-</style>
+<style scoped></style>

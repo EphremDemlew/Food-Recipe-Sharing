@@ -28,7 +28,7 @@ console.log(val);
 </script>
 <template>
   <div class="w-full">
-    <div class="bg-black -mt-20 hero flex items-center justify-center">
+    <div class="bg-blue-100 -mt-20 texture flex items-center justify-center">
       <div
         class="hero-content flex flex-col justify-evenly items-center md:flex-row md:ml-20"
       >
@@ -92,18 +92,24 @@ console.log(val);
 
 <style>
 .hero {
-  background-image: url(../assets/oie_pnkme2e83ufr.jpg);
+  background-image: url(../assets/1.png);
   background-attachment: fixed;
-  background-position: center left;
+  background-position: top right;
   background-size: cover;
 }
 .texture {
   background-image: url(../assets/foodtexure.jpg);
+  background-attachment: fixed;
+
   background-blend-mode: soft-light;
   background-blend-mode: screen;
 }
 li .router-link-active {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+#active-btn-text {
+  color: #fff;
 }
 </style>

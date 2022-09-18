@@ -1,6 +1,6 @@
 <template>
   <section
-    class="min-h-screen flex items-center justify-center hero pt-36 pb-20"
+    class="min-h-screen flex items-center justify-center texture bg-blue-200 pt-16 pb-20"
   >
     <div
       v-if="check == true"

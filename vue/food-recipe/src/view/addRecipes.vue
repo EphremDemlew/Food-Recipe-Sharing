@@ -17,7 +17,7 @@
       <!-- aler -->
       <div class="fixed bottom-5 right-5">
         <div
-          v-if="error"
+          v-if="errors"
           class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
           role="alert"
         >
@@ -184,12 +184,7 @@
                     <span class="font-semibold">Click to upload Images</span> or
                     drag and drop
                   </p>
-                  <p
-                    v-if="ifile.length > 0"
-                    class="text-base text-gray-500 dark:text-gray-400"
-                  >
-                    {{ file.name }}
-                  </p>
+
                   <p
                     v-if="name == ''"
                     class="text-xs text-gray-500 dark:text-gray-400"
@@ -201,11 +196,30 @@
                     id="dropzone-file"
                     type="file"
                     class="hidden"
-                    ref="imgFile"
+                    ref="files"
                     @change="selectFile"
                   />
                 </div>
               </label>
+            </div>
+            <div
+              class="flex justify-between"
+              v-for="(file, index) in files"
+              :key="index"
+            >
+              <div class="pl-5">
+                <p
+                  v-if="name != ''"
+                  class="text-base text-gray-500 dark:text-gray-400"
+                >
+                  {{ ifile.name }}
+                </p>
+              </div>
+              <div class="mr-5">
+                <button class="text-gray-900" @click="ifile.slic">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+              </div>
             </div>
 
             <button
@@ -232,7 +246,7 @@
 
               Add Recipe
             </button>
-            <p v-if="error" class="text-xs ml-4 text-red-500">
+            <p v-if="errors" class="text-xs ml-4 text-red-500">
               {{ message }}
             </p>
           </form>
@@ -256,7 +270,7 @@ const user = userStore();
 
 const router = useRouter();
 let users = ref({});
-let imgFile = ref("");
+let files = ref([]);
 let img_url = ref("");
 let name = ref("");
 let ifile = ref({});
@@ -305,7 +319,13 @@ onDone((res) => {
   if (filetypes.includes(ifile.value.type) && !tooLarge) {
     const fd = new FormData();
     fd.append("file", ifile.value);
-    fd.append("recipeID", recipeID);
+    // fd.append("recipeID", recipeID);
+    // fd.append("title", recs.value.title);
+    // fd.append("description", recs.value.description);
+    // fd.append("ingridents", recs.value.ingridents);
+    // fd.append("steps", recs.value.steps);
+    // fd.append("category", recs.value.cats);
+    // fd.append("time", recs.value.time);
 
     axios
       .post("http://localhost:5000/uploadeImage", fd)
@@ -338,7 +358,10 @@ const addCatsRows = () => {
 const addStepRows = () => {
   recs.value.stepRows++;
 };
-const selectFile = (value) => {
+const selectFile = () => {
+  let files = files.value.files;
+  files = [...files, ...files.value];
+
   // imgFile = ref.imgFile.files[0];
   console.log("/'/'/'/'/'/'/'/'/'/");
   name.value = imgFile.value.files[0].name;
