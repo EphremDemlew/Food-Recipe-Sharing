@@ -164,12 +164,15 @@ const loginUser = async (value) => {
     if (res.data) {
       const token = res.data.login.token;
       const Id = res.data.login.id;
-      const name = res.data.login.first_name;
+      const fname = res.data.login.first_name;
+      const lname = res.data.login.last_name;
       const email = res.data.login.email;
       const createdDate = res.data.login.created_at;
-      user.login(token, Id, createdDate, name, email);
+      user.login(token, Id, createdDate, fname, lname, email);
       console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
       console.log(Id);
+      console.log(res.data);
+
       // toste();
       router.push("/home");
 

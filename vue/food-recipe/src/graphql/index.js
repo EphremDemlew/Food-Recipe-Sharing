@@ -123,6 +123,8 @@ export const login_query = gql`
       id
       token
       first_name
+      last_name
+      email
       created_at
     }
   }

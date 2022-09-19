@@ -113,7 +113,7 @@ const toggleNav = () => (showMenu.value = !showMenu.value);
             @click="router.push('/profile')"
           >
             <div class="font-medium text-white dark:text-white w-36">
-              <div>Hi! {{ user.name }}</div>
+              <div>Hi! {{ user.Fname }}</div>
               <div class="text-sm text-gray-100 dark:text-white">WellCome</div>
             </div>
             <img

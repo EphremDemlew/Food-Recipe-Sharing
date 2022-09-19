@@ -7,18 +7,20 @@ export const userStore = defineStore("userStore", {
   state: () => ({
     Id: useStorage("id", ""),
     createdDate: useStorage("createdDate", ""),
-    name: useStorage("name", ""),
+    Fname: useStorage("FirsName", ""),
+    Lname: useStorage("LastName", ""),
     email: useStorage("email", ""),
     isLoggedIn: useStorage("isLoggedIn", false),
     // isLoggedIn: false,
   }),
   getters: {},
   actions: {
-    async login(token, id, createdAt, name, email) {
+    async login(token, id, createdAt, Fname, Lname, email) {
       this.isLoggedIn = true;
       this.Id = id;
       this.createdDate = createdAt;
-      this.name = name;
+      this.Fname = Fname;
+      this.Lname = Lname;
       this.email = email;
       window.localStorage.setItem("token", token);
     },
@@ -28,9 +30,11 @@ export const userStore = defineStore("userStore", {
       window.localStorage.removeItem("isLoggedIn");
       window.localStorage.removeItem("id");
       window.localStorage.removeItem("createdDate");
+      window.localStorage.removeItem("FirsName");
+      window.localStorage.removeItem("LastName");
       window.localStorage.removeItem("name");
       window.localStorage.removeItem("eamil");
-      this.state.value = null;
+      this.state = null;
       this.$reset();
     },
   },

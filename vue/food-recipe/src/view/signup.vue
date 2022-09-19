@@ -192,10 +192,11 @@ const addUser = async (value) => {
       console.log(res.data);
       const token = res.data.sign_up.token;
       const Id = res.data.sign_up.id;
-      const name = res.data.sign_up.first_name;
+      const Fname = res.data.sign_up.first_name;
+      const Lname = res.data.sign_up.last_name;
       const email = res.data.sign_up.email;
       const createdDate = res.data.sign_up.created_at;
-      user.login(token, Id, createdDate, name, email);
+      user.login(token, Id, createdDate, Fname, Lname, email);
       router.push("/home");
 
       return;
