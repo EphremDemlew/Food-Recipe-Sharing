@@ -57,7 +57,6 @@ const router = createRouter({
   ],
 });
 router.beforeEach((to, from, next) => {
-  console.log("Global Guarde");
   if (!to.meta.requiresAuth) {
     next();
     return;

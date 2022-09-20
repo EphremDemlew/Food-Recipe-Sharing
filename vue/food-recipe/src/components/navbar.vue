@@ -1,12 +1,17 @@
 <script setup>
 import { userStore } from "../stores/userStore";
+import { useProductStore } from "../stores/productStore";
+
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 const router = useRouter();
 const user = userStore();
+const products = useProductStore();
 
 const logoutUser = () => {
   user.logout();
+  products.clearProductOnLogout();
+
   // product.$reset;
   router.push("/login");
 };

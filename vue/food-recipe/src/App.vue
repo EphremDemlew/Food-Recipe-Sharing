@@ -2,26 +2,38 @@
 import footerPart from "./components/footer.vue";
 import navbar from "./components/navbar.vue";
 import { useProductStore } from "./stores/productStore";
-import { full_recipe_query } from "./graphql/index";
+import { full_recipe_query, favorite_recipe_query } from "./graphql/index";
 import { useQuery } from "@vue/apollo-composable";
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 const recipes = useProductStore();
-const res = ref("");
+let res = ref();
 
 const { result, loading, error, onResult } = useQuery(full_recipe_query);
+
 onResult((val) => {
-  recipes.addRecipes(val);
-  // res.value = "asd";
+  console.log(val);
+  if (val.loading == false) recipes.addRecipes(val);
 });
+
+// const addFavrecipes = () => {
+//   const {
+//     result: r,
+//     loading: favRecipesLoading,
+//     error,
+//     onResult,
+//   } = useQuery(favorite_recipe_query);
+//   onResult((val) => {
+//     recipes.addFavoriteRecipes(val);
+//   });
+// };
+// addFavrecipes();
 </script>
 
 <template>
-  <div>
-    <navbar />
-    <router-view :load="loading" :result="result"> </router-view>
-    <footerPart />
-  </div>
+  <navbar />
+  <router-view> </router-view>
+  <footerPart />
 </template>
 
 <style>

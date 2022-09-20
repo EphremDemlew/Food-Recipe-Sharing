@@ -9,6 +9,9 @@ export const useProductStore = defineStore("productStore", {
     favouritRecipes: useStorage(" favoritRecipes", []),
   }),
   getters: {
+    getAllRecipes: (state) => {
+      return state.recipes;
+    },
     getRecipeById: (state) => {
       return (userId) =>
         state.recipes.find((recipe) => recipe.title === userId);
@@ -17,6 +20,13 @@ export const useProductStore = defineStore("productStore", {
   actions: {
     async addRecipes(...recipes) {
       this.recipes = recipes;
+    },
+    async addFavoriteRecipes(...favoritRecipes) {
+      this.favouritRecipes = favoritRecipes;
+    },
+    async clearProductOnLogout() {
+      // this.favouritRecipes = [];
+      // this.$reset();
     },
   },
 });

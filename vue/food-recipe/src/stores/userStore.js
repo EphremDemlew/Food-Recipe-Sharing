@@ -26,15 +26,8 @@ export const userStore = defineStore("userStore", {
     },
     async logout() {
       this.isLoggedIn = false;
-      window.localStorage.removeItem("token");
-      window.localStorage.removeItem("isLoggedIn");
-      window.localStorage.removeItem("id");
-      window.localStorage.removeItem("createdDate");
-      window.localStorage.removeItem("FirsName");
-      window.localStorage.removeItem("LastName");
-      window.localStorage.removeItem("name");
-      window.localStorage.removeItem("eamil");
-      this.state = null;
+      localStorage.clear();
+      // this.state = null;
       this.$reset();
     },
   },
