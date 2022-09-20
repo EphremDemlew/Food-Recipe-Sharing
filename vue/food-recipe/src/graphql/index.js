@@ -5,7 +5,7 @@ export const full_recipe_query = gql`
     recipe {
       id
       title
-      desc
+      description
       time
       user_id
       images {
@@ -68,7 +68,7 @@ export const favorite_recipe_query = gql`
       recipe {
         id
         title
-        desc
+        description
         time
         user_id
         user {
@@ -159,10 +159,61 @@ export const imgUploade = gql`
     }
   }
 `;
+export const search_recipe = gql`
+  query searchRecipes($search: String!) {
+    search_recipes(args: { search: $search }) {
+      id
+      title
+      description
+      time
+      user_id
+      images {
+        image_url
+      }
+      steps {
+        steps
+      }
+      Ingredients {
+        ingridents
+      }
+      categories {
+        category
+      }
+      comments {
+        comment
+      }
+      likes {
+        like
+      }
+      likes_aggregate {
+        aggregate {
+          count(columns: like)
+        }
+      }
+      comments_aggregate {
+        aggregate {
+          count(columns: comment)
+        }
+      }
+      ratings {
+        rating
+      }
+      ratings_aggregate {
+        aggregate {
+          avg {
+            rating
+          }
+        }
+      }
+    }
+  }
+`;
 
 export const recipeUploade = gql`
-  mutation ($title: String!, $time: numeric!, $desc: String!) {
-    insert_recipe_one(object: { desc: $desc, time: $time, title: $title }) {
+  mutation ($title: String!, $time: numeric!, $description: String!) {
+    insert_recipe_one(
+      object: { description: $description, time: $time, title: $title }
+    ) {
       id
     }
   }

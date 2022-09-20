@@ -40,7 +40,6 @@ const val = computed(() => {
             Search through the recipes tailored to your needs. When you favorite
             a recipe, you can jump right into making it now, or put it on your
             favorite section and come back later.
-            {{ recipes.recipes[0].data.recipe[0].desc }}
           </p>
           <router-link
             to="/login"
@@ -73,7 +72,7 @@ const val = computed(() => {
       v-if="recipes.recipes.length > 0"
       class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center bg-green-100 texture pb-10"
     >
-      <div v-for="rec in val && val" :key="rec.id">
+      <div v-for="rec in val" :key="rec.id">
         <cards
           class="w-96 place-items-center md:w- lg:w-80"
           :title="rec.title"

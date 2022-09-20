@@ -140,7 +140,7 @@
               <!-- socialmedias not working now but for later -->
             </div>
             <div>
-              <p class="leading-relaxed">{{ favouriteRecipe.desc }}</p>
+              <p class="leading-relaxed">{{ favouriteRecipe.description }}</p>
               <div
                 class="flex flex-col mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5"
               >

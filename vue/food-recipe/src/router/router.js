@@ -49,6 +49,11 @@ const router = createRouter({
       name: "recipeDetails",
       component: () => import("../view/recipeDetails.vue"),
     },
+    {
+      path: "/recipes/:recQuery",
+      name: "SearchResult",
+      component: () => import("../view/SearchResult.vue"),
+    },
 
     {
       path: "/:pathMatch(.*)*",

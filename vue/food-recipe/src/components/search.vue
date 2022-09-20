@@ -2,9 +2,14 @@
   <div class="min-h-fit bg-white flex flex-col justify-center items-center">
     <div class="relative pt-12 scroll -pb-10 w-full sm:max-w-2xl sm:mx-auto">
       <div class="overflow-hidden z-0 rounded-full relative p-3">
-        <form role="form" class="relative flex z-50 bg-white rounded-full">
+        <form
+          @submit.prevent="search(searchText)"
+          role="form"
+          class="relative flex z-50 bg-white rounded-full"
+        >
           <input
             type="text"
+            v-model="searchText"
             placeholder="enter your search here"
             class="rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none w-2/3"
           />
@@ -20,9 +25,25 @@
         <div class="glow glow-4 z-40 bg-pink-400 absolute"></div>
       </div>
     </div>
+    <div></div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useQuery } from "@vue/apollo-composable";
+import cards from "./cards.vue";
+import { search_recipe } from "../graphql/index";
+import loadingView from "./loading.vue";
+import { useProductStore } from "../stores/productStore";
+import { useRouter } from "vue-router";
+import { ref } from "@vue/reactivity";
+import { computed, onMounted } from "vue";
+
+const searchText = ref("");
+const router = useRouter();
+const search = (st) => {
+  router.push(`/recipes/${st}`);
+};
+</script>
 
 <style scoped>
 .glow {
