@@ -40,10 +40,12 @@ console.log(result.value);
       <div v-for="rec in result.search_recipe" :key="rec.id">
         <cards
           class="w-96 place-items-center md:w- lg:w-80"
-          :title="rec.title"
           :id="rec.id"
+          :title="rec.title"
+          :description="rec.description"
           :img_url="rec.images[0].image_url"
-          :like="rec.likes.likes_aggregate"
+          :like="rec.likes_aggregate.aggregate.count"
+          :time="rec.time"
         />
       </div>
     </div>

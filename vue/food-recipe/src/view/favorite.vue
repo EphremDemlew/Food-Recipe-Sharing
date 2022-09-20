@@ -9,10 +9,12 @@
       <div v-for="rec in result.favorite" :key="rec">
         <cards
           class="w-96 place-items-center lg:w-80"
-          :title="rec.recipe.title"
-          :id="rec.recipe.id"
-          :img_url="rec.recipe.images[0].image_url"
-          :like="rec.recipe.likes"
+          :id="rec.id"
+          :title="rec.title"
+          :description="rec.description"
+          :img_url="rec.images[0].image_url"
+          :like="rec.likes_aggregate.aggregate.count"
+          :time="rec.time"
         />
       </div>
     </div>

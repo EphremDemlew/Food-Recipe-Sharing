@@ -55,7 +55,7 @@
                 <button
                   class="mr-2 mb-2 rounded-full px-3 py-1 text-xs font-bold border-1 cursor-auto glow border-green-700 bg-green-500 text-green-900"
                 >
-                  <!-- {{ time }}  -->0 min
+                  {{ time }} min
                 </button>
               </div>
             </div>
@@ -149,6 +149,7 @@
               This revolutionary email design kit is going to transform the way
               in which you send modern emails.
             </p>
+            <p v-if="description">{{ description }}</p>
           </div>
           <div class="flex flex-row justify-between pr-5 py-8">
             <div class="flex space-x-1 items-center">
@@ -166,7 +167,8 @@
                   />
                 </svg>
               </span>
-              <span>0</span>
+              <span v-if="like < 1">0</span>
+              <span v-else>{{ like }}</span>
             </div>
             <div class="flex space-x-1 items-center">
               <button
@@ -177,24 +179,6 @@
               </button>
             </div>
           </div>
-          <!-- <div class="w-full sm:flex-1 grid gap-4 grid-cols-2 pt-6">
-            <i
-              class="fa-solid fa-thumbs-up text-[#002D74] hover:text-[#001172] cursor-pointer"
-            >
-              <span
-                class="inline-flex justify-center items-center ml-2 w-4 h-4 text-xs font-semibold text-blue-800 bg-transparent rounded-full"
-              >
-                {{ like }}2
-              </span>
-            </i>
-
-            <button
-              x-on:click="pay('Essential')"
-              class="w-full block text-center relative text-white font-bold text-sm bg-red-500 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75"
-            >
-              Preview
-            </button>
-          </div> -->
         </div>
       </div>
     </div>
@@ -208,10 +192,12 @@ import { ref } from "vue";
 const router = useRouter();
 
 defineProps({
+  id: String,
   title: String,
+  description: String,
   img_url: String,
   like: Number,
-  id: String,
+  time: Number,
 });
 const preview = (title, id) => {
   const slug = ref("");
