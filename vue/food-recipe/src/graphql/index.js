@@ -11,6 +11,9 @@ export const full_recipe_query = gql`
       images {
         image_url
       }
+      favorites {
+        recipe_id
+      }
       steps {
         steps
       }
@@ -127,6 +130,21 @@ export const favorite_recipe_query = gql`
           }
         }
       }
+    }
+  }
+`;
+
+export const add_likes_query = gql`
+  mutation ($recipe_id: uuid!) {
+    insert_likes(objects: { recipe_id: $recipe_id, like: 1 }) {
+      affected_rows
+    }
+  }
+`;
+export const remove_likes_query = gql`
+  mutation ($recipe_id: uuid!) {
+    delete_likes(where: { recipe_id: { _eq: $recipe_id } }) {
+      affected_rows
     }
   }
 `;

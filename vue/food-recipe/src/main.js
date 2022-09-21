@@ -17,8 +17,14 @@ import { createApp, provide, h } from "vue";
 import App from "./App.vue";
 import "./index.css";
 import router from "./router/router";
-// import store from "./stores/user.js";
 import { createPinia } from "pinia";
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
+const options = {
+  // You can set your default options here
+};
 
 const app = createApp({
   setup() {
@@ -29,5 +35,5 @@ const app = createApp({
 })
   .use(router)
   .use(createPinia())
-  // .use(store)
+  .use(Toast, options)
   .mount("#app");
