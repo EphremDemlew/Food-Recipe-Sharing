@@ -11,9 +11,6 @@ export const full_recipe_query = gql`
       images {
         image_url
       }
-      favorites {
-        recipe_id
-      }
       steps {
         steps
       }

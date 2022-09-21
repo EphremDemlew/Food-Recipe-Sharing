@@ -150,11 +150,12 @@
                   <div>
                     <button
                       @click="toogleFavourite(id)"
-                      class="inline-flex items-center px-5 text-sm font-medium text-center text-black rounded-lg focus:outline-none focus:ring-red-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      :disabled="user.isLoggedIn == false ? '' : disabled"
+                      class="inline-flex items-center z-20 px-5 text-sm font-medium text-center text-black rounded-lg focus:outline-none focus:ring-red-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                       <i
                         :class="!isFav ? 'text-gray-400' : 'text-yellow-500'"
-                        class="fa-solid fa-bookmark text-xl cursor-pointer"
+                        class="fa-solid fa-bookmark text-xl"
                       ></i>
                     </button>
                   </div>
@@ -170,27 +171,39 @@
             <div class="flex flex-row justify-between pr-5 py-8">
               <div class="flex space-x-1 items-center">
                 <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-7 w-7 text-red-500 hover:text-red-400 transition duration-100 cursor-pointer"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                  <button
+                    :disabled="user.isLoggedIn == false ? '' : disabled"
+                    @click="toggleLike(id)"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-7 w-7 transition duration-100"
+                      :class="
+                        !isLiked
+                          ? 'text-gray-400 hover:text-gray-300'
+                          : 'text-red-500 hover:text-red-400'
+                      "
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
                 </span>
-                <span v-if="like < 1">0</span>
+                <span v-if="isLiked">{{ like + 1 }}</span>
+                <span v-else-if="like < 1">0 </span>
+
                 <span v-else>{{ like }}</span>
               </div>
               <div class="flex space-x-1 items-center">
                 <button
                   @click="preview(title, id)"
-                  :disabled="user.isLoggedIn ? '' : disabled"
                   class="w-full block text-center relative text-white font-bold text-sm bg-red-500 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75"
+                  :disabled="user.isLoggedIn == false ? '' : disabled"
                 >
                   Preview
                 </button>
@@ -207,7 +220,12 @@
 import { computed } from "@vue/reactivity";
 import { useRouter } from "vue-router";
 import alertMessageVue from "./alertMessage.vue";
-import { add_favorite_recipe, remove_favorite_recipe } from "../graphql/index";
+import {
+  add_favorite_recipe,
+  remove_favorite_recipe,
+  add_likes_query,
+  remove_likes_query,
+} from "../graphql/index";
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import { userStore } from "../stores/userStore";
 import { ref } from "vue";
@@ -225,6 +243,7 @@ const props = defineProps({
   time: Number,
 });
 let isFav = ref(false);
+let isLiked = ref(false);
 let sucessCheck = ref(false);
 let failureCheck = ref(false);
 
@@ -236,6 +255,15 @@ const toogleFavourite = (id) => {
     removeFavourite(id);
   }
 };
+const toggleLike = (id) => {
+  isLiked.value = !isLiked.value;
+  if (isLiked.value == true) {
+    addLikes(id);
+  } else if (isLiked.value == false) {
+    removeLikes(id);
+  }
+};
+
 const addFavourite = async (id) => {
   addFav({ recipe_id: id });
   onDone((res) => {
@@ -254,23 +282,54 @@ const removeFavourite = async (id) => {
   sucessCheck.value = false;
 };
 
-// The ADD Favourite Mutation
+//                                                                    The ADD Favourite Mutation
 const {
   mutate: addFav,
   loading: addFavloading,
   error: addFaverror,
   onDone,
 } = useMutation(add_favorite_recipe);
-// The ADD Favourite Mutation
+//                                                                     The ADD Favourite Mutation
 
-// The REMOVE Favourite Mutation
+//                                                                     The REMOVE Favourite Mutation
 const {
   mutate: removeFav,
   loading: removeFavloading,
   error: removeFaverror,
   onDone: removeonDone,
 } = useMutation(remove_favorite_recipe);
-// The REMOVE Favourite Mutation
+//                                                                     The REMOVE Favourite Mutation
+
+const addLikes = async (id) => {
+  addLike({ recipe_id: id });
+  addLikeOnDone((res) => {
+    props.like += 1;
+  });
+};
+const removeLikes = async (id) => {
+  removelike({ recipe_id: id });
+  removeLikeOnDone((res) => {
+    props.like += 1;
+  });
+};
+
+//                                                                     The ADD Like Mutation
+const {
+  mutate: addLike,
+  loading: addLikeloading,
+  error: addlikeerror,
+  onDone: addLikeOnDone,
+} = useMutation(add_likes_query);
+//                                                                     The ADD Like Mutation
+
+//                                                                     The REMOVE Like Mutation
+const {
+  mutate: removelike,
+  loading: removelikeloading,
+  error: removelikeerror,
+  onDone: removeLikeOnDone,
+} = useMutation(remove_likes_query);
+//                                                                     The REMOVE Like Mutation
 
 const preview = (title, id) => {
   const slug = ref("");

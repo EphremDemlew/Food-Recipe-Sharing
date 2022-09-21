@@ -1,1 +1,2 @@
 - "!include public_search_recipe.yaml"
+- "!include public_search_recipes.yaml"

@@ -18,9 +18,11 @@ onResult((val) => {
 </script>
 
 <template>
-  <navbar />
-  <router-view> </router-view>
-  <footerPart />
+  <div>
+    <navbar />
+    <router-view> </router-view>
+    <footerPart />
+  </div>
 </template>
 
 <style>

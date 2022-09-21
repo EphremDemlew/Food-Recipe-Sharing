@@ -5,14 +5,18 @@ object_relationships:
   - name: recipe
     using:
       foreign_key_constraint_on: recipe_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
 insert_permissions:
   - role: user
     permission:
       check:
-        recipe:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-user-id
       columns:
         - like
         - recipe_id
@@ -28,9 +32,10 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - like
         - id
+        - like
         - recipe_id
+        - user_id
       filter: {}
       allow_aggregations: true
 update_permissions:
@@ -38,11 +43,11 @@ update_permissions:
     permission:
       columns:
         - like
+        - recipe_id
       filter:
-        recipe:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
+        user:
+          id:
+            _eq: X-Hasura-User-Id
       check:
         recipe:
           user:
@@ -53,7 +58,6 @@ delete_permissions:
     permission:
       backend_only: false
       filter:
-        recipe:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
+        user:
+          id:
+            _eq: X-Hasura-User-Id
