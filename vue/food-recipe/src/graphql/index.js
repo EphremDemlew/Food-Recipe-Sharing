@@ -62,6 +62,13 @@ export const recipe_query = gql`
     }
   }
 `;
+export const add_favorite_recipe = gql`
+  mutation ($recipe_id: uuid!) {
+    insert_favorite(objects: { recipe_id: $recipe_id }) {
+      affected_rows
+    }
+  }
+`;
 export const favorite_recipe_query = gql`
   query {
     favorite {

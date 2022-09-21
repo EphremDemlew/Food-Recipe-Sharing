@@ -133,14 +133,14 @@
                   </span>
                 </div>
                 <div>
-                  <router-link
-                    to="/favorite"
+                  <button
+                    @click="addFavourite(id)"
                     class="inline-flex items-center px-5 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     <i
                       class="fa-solid fa-bookmark text-yellow-400 text-xl shadow-2xl cursor-pointer"
                     ></i>
-                  </router-link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -187,6 +187,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { add_favorite_recipe } from "../graphql/index";
 import { ref } from "vue";
 
 const router = useRouter();
@@ -199,6 +200,39 @@ defineProps({
   like: Number,
   time: Number,
 });
+const fav = ref(false);
+const toogleFavourite = (id) => {
+  addFavourite(id);
+};
+const addFavourite = (id) => {
+  const {
+    mutate: addFav,
+    loading: addFavloading,
+    error: addFaverror,
+    onDone,
+  } = useMutation(add_favorite_recipe, {
+    recipe_id: id,
+  });
+
+  onDone((res) => {
+    router.push("/favorite");
+  });
+};
+const removeFavourite = (id) => {
+  const {
+    mutate: addFav,
+    loading: addFavloading,
+    error: addFaverror,
+    onDone,
+  } = useMutation(add_favorite_recipe, {
+    recipe_id: id,
+  });
+
+  onDone((res) => {
+    router.push("/favorite");
+  });
+};
+
 const preview = (title, id) => {
   const slug = ref("");
 

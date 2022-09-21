@@ -17,7 +17,9 @@ const searchResults = computed(() => route.params.recQuery);
 const { result, loading, error } = useQuery(search_recipe, {
   search: searchResults.value,
 });
-console.log(result.value);
+const val = computed(() => result.value?.search_recipes ?? []);
+const noResult = computed(() => (val.value.length < 1 ? "true" : "false"));
+console.log(val.value);
 </script>
 <template>
   <div>
@@ -30,14 +32,14 @@ console.log(result.value);
     <div v-if="loading" class="flex justify-center items-center">
       <loading-view></loading-view>
     </div>
-    <div v-if="result.search_recipe.length == 0" class="mb-20">
+    <div v-if="noResult == true" class="mb-20">
       <NoData message="The recipe you searched for is not available" />
     </div>
     <div
-      v-if="result.search_recipe.length > 0"
+      v-else
       class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center bg-green-100 texture pb-10"
     >
-      <div v-for="rec in result.search_recipe" :key="rec.id">
+      <div v-for="rec in val" :key="rec.id">
         <cards
           class="w-96 place-items-center md:w- lg:w-80"
           :id="rec.id"
