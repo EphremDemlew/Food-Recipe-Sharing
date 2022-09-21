@@ -134,11 +134,12 @@
                 </div>
                 <div>
                   <button
-                    @click="addFavourite(id)"
-                    class="inline-flex items-center px-5 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    @click="toogleFavourite(id)"
+                    class="inline-flex items-center px-5 text-sm font-medium text-center text-black rounded-lg focus:outline-none focus:ring-red-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     <i
-                      class="fa-solid fa-bookmark text-yellow-400 text-xl shadow-2xl cursor-pointer"
+                      :class="!isFav ? 'text-gray-400' : 'text-yellow-500'"
+                      class="fa-solid fa-bookmark text-xl cursor-pointer"
                     ></i>
                   </button>
                 </div>
@@ -173,6 +174,7 @@
             <div class="flex space-x-1 items-center">
               <button
                 @click="preview(title, id)"
+                :disabled="user.isLoggedIn ? '' : disabled"
                 class="w-full block text-center relative text-white font-bold text-sm bg-red-500 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75"
               >
                 Preview
@@ -186,13 +188,18 @@
 </template>
 
 <script setup>
+import { computed } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import { add_favorite_recipe } from "../graphql/index";
+import { add_favorite_recipe, remove_favorite_recipe } from "../graphql/index";
+import { useQuery, useMutation } from "@vue/apollo-composable";
+import { userStore } from "../stores/userStore";
 import { ref } from "vue";
 
+const user = userStore();
+console.log(user.isLoggedIn);
 const router = useRouter();
 
-defineProps({
+const props = defineProps({
   id: String,
   title: String,
   description: String,
@@ -200,38 +207,51 @@ defineProps({
   like: Number,
   time: Number,
 });
-const fav = ref(false);
+let isFav = ref(false);
+
 const toogleFavourite = (id) => {
-  addFavourite(id);
+  isFav.value = !isFav.value;
+  if (isFav.value == true) {
+    addFavourite(id);
+  } else if (isFav.value == false) {
+    removeFavourite(id);
+  }
 };
-const addFavourite = (id) => {
-  const {
-    mutate: addFav,
-    loading: addFavloading,
-    error: addFaverror,
-    onDone,
-  } = useMutation(add_favorite_recipe, {
-    recipe_id: id,
-  });
-
+const addFavourite = async (id) => {
+  addFav({ recipe_id: id });
   onDone((res) => {
-    router.push("/favorite");
+    console.log(res);
+    // router.push("/favorite");
   });
+  // recipeID = {};
 };
-const removeFavourite = (id) => {
-  const {
-    mutate: addFav,
-    loading: addFavloading,
-    error: addFaverror,
-    onDone,
-  } = useMutation(add_favorite_recipe, {
-    recipe_id: id,
-  });
+const removeFavourite = async (id) => {
+  removeFav({ recipe_id: id });
 
-  onDone((res) => {
-    router.push("/favorite");
+  removeonDone((res) => {
+    console.log(res);
+    // router.push("/favorite");
   });
+  // recipeID = {};
 };
+
+// The ADD Favourite Mutation
+const {
+  mutate: addFav,
+  loading: addFavloading,
+  error: addFaverror,
+  onDone,
+} = useMutation(add_favorite_recipe);
+// The ADD Favourite Mutation
+
+// The REMOVE Favourite Mutation
+const {
+  mutate: removeFav,
+  loading: removeFavloading,
+  error: removeFaverror,
+  onDone: removeonDone,
+} = useMutation(remove_favorite_recipe);
+// The REMOVE Favourite Mutation
 
 const preview = (title, id) => {
   const slug = ref("");

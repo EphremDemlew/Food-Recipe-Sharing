@@ -15,19 +15,6 @@ onResult((val) => {
   console.log(val);
   if (val.loading == false) recipes.addRecipes(val);
 });
-
-// const addFavrecipes = () => {
-//   const {
-//     result: r,
-//     loading: favRecipesLoading,
-//     error,
-//     onResult,
-//   } = useQuery(favorite_recipe_query);
-//   onResult((val) => {
-//     recipes.addFavoriteRecipes(val);
-//   });
-// };
-// addFavrecipes();
 </script>
 
 <template>

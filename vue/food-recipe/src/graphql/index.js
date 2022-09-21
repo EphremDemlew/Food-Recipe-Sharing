@@ -69,6 +69,13 @@ export const add_favorite_recipe = gql`
     }
   }
 `;
+export const remove_favorite_recipe = gql`
+  mutation deleteFavorite($recipe_id: uuid!) {
+    delete_favorite(where: { recipe_id: { _eq: $recipe_id } }) {
+      affected_rows
+    }
+  }
+`;
 export const favorite_recipe_query = gql`
   query {
     favorite {
